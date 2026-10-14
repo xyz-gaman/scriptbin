@@ -4,124 +4,189 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Admin · Scriptbin</title>
+<title>Admin · ScriptBin</title>
 <style>
-:root{--bg:#0b0d12;--s1:#12151c;--s2:#181c26;--line:#252a37;--text:#eceef4;--mute:#8a92a6;--acc:#7c8cff;--acc2:#b07cff;--ok:#3ddc97;--bad:#ff6b6b}
+:root{--bg:#0a0c10;--s1:#11141a;--s2:#161a22;--s3:#1c212b;--line:#222833;--line2:#2c3340;--text:#e8eaf0;--mute:#8b93a5;--acc:#6366f1;--acc2:#8b5cf6;--ok:#22c55e;--bad:#ef4444}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:radial-gradient(900px 420px at 50% -120px,#1d2346 0,transparent 70%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
-.wrap{max-width:760px;margin:0 auto;padding:18px 16px 70px}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(700px 360px at 50% -80px,rgba(99,102,241,.2),transparent 70%)}
+svg{display:block}
+button{font-family:inherit}
 .hide{display:none!important}
-.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
-.logo i{font-style:normal;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--acc),var(--acc2));font-size:13px;font-weight:800}
-.tag{font-size:11px;color:var(--acc);border:1px solid var(--acc);padding:3px 8px;border-radius:99px;margin-left:4px}
-.top a{color:var(--mute);font-size:14px;text-decoration:none}
-.card{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px}
-.card h2{font-size:15px;margin:0 0 14px;color:var(--text)}
-label{display:block;font-size:12px;color:var(--mute);margin:12px 0 6px}
-input[type=text],input[type=password],select,textarea{width:100%;padding:13px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:16px;outline:none;font-family:inherit}
-input:focus,select:focus,textarea:focus{border-color:var(--acc)}
-textarea{min-height:260px;resize:vertical;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn{width:100%;margin-top:16px;padding:14px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-size:16px;font-weight:600;cursor:pointer}
-.btn:disabled{opacity:.5}
-.sm{padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--s2);color:var(--text);font-size:13px;cursor:pointer}
-.sm.del{color:var(--bad)}
-.row{display:flex;align-items:center;gap:10px}
-.dot{width:10px;height:10px;border-radius:50%;background:var(--ok);flex:none}
+.nav{position:sticky;top:0;z-index:20;background:rgba(10,12,16,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:760px;margin:0 auto;height:60px;padding:0 16px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.2px}
+.logo{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
+.tagadmin{font-size:10.5px;font-weight:700;letter-spacing:.8px;color:#a5b4fc;background:rgba(99,102,241,.14);border:1px solid rgba(99,102,241,.35);padding:2px 8px;border-radius:99px}
+.vsite{color:var(--mute);font-size:14px;text-decoration:none;display:flex;align-items:center;gap:6px}
+.vsite:hover{color:var(--text)}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 60px}
+.hero{padding:34px 0 20px}
+.hero h1{font-size:30px;letter-spacing:-.8px;margin:0 0 8px;font-weight:800}
+.hero p{margin:0;color:var(--mute)}
+.panel{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px}
+.ph{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.step{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:700;font-size:14px;background:rgba(99,102,241,.15);color:#a5b4fc;border:1px solid rgba(99,102,241,.3)}
+.ph b{display:block;font-size:16px}
+.ph small{color:var(--mute);font-size:13px}
+label{display:block;font-size:12.5px;font-weight:500;color:var(--mute);margin:16px 0 7px}
+input[type=text],input[type=password],select,textarea{width:100%;padding:0 14px;height:48px;border-radius:11px;border:1px solid var(--line2);background:var(--bg);color:var(--text);font-size:16px;outline:none;font-family:inherit}
+select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b93a5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+textarea{height:auto;min-height:280px;padding:14px;resize:vertical;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(99,102,241,.18)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{width:100%;margin-top:20px;height:50px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-size:15.5px;font-weight:600;cursor:pointer}
+.btn:disabled{opacity:.55;cursor:wait}
+.btn2{padding:9px 14px;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--text);font-size:13px;cursor:pointer}
+.okrow{display:flex;align-items:center;gap:12px;margin-top:8px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--ok);flex:none;box-shadow:0 0 0 4px rgba(34,197,94,.15)}
 .grow{flex:1;min-width:0}
-.mute{color:var(--mute);font-size:13px}
-.sw{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:14px;color:var(--text)}
-.sw input{width:20px;height:20px}
-.msg{margin-top:12px;font-size:14px;word-break:break-all}
-.msg.ok{color:var(--ok)}.msg.bad{color:var(--bad)}
-.msg a{color:var(--ok)}
-.pi{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--line)}
-.pi:first-of-type{border-top:0}
-.pi b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.okrow b{display:block;font-size:14.5px}
+.okrow small{color:var(--mute);font-size:12.5px}
+.help{margin-top:12px;background:var(--s2);border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-size:13.5px;color:var(--mute)}
+.help summary{cursor:pointer;color:#a5b4fc;font-weight:500}
+.help ol{margin:10px 0 0;padding-left:20px;line-height:1.8}
+.help b{color:var(--text);font-weight:600}
+.sw{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14px;color:var(--text);cursor:pointer}
+.sw input{width:20px;height:20px;accent-color:var(--acc);margin:0}
+.msg{margin-top:14px;font-size:14px;line-height:1.5;word-break:break-word}
+.msg.ok{color:var(--ok)}.msg.bad{color:#fca5a5;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);padding:12px 14px;border-radius:10px}
+.msg a{color:#86efac;word-break:break-all}
+.msg .btn2{margin-top:10px}
+.lhead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pi{display:flex;align-items:center;gap:10px;padding:13px 0;border-top:1px solid var(--line)}
+.pi:first-child{border-top:0}
+.pi .t{flex:1;min-width:0}
+.pi a{display:block;color:var(--text);font-size:14.5px;font-weight:600;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pi small{color:var(--mute);font-size:12px}
-.pi .acts{display:flex;gap:6px;flex:none}
-.cnt{float:right;font-size:12px;color:var(--mute);margin-top:-22px}
+.ib{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--mute);cursor:pointer}
+.ib:hover{color:var(--text);border-color:var(--acc)}
+.ib.dg:hover{color:var(--bad);border-color:var(--bad)}
+.muted{color:var(--mute);font-size:14px;padding:6px 0}
+.cnt{color:var(--mute);font-size:12.5px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="top">
-    <div class="logo"><i>&lt;/&gt;</i>ScriptVault <span class="tag">ADMIN</span></div>
-    <a id="siteLink" href="./">View site ↗</a>
+<nav class="nav"><div class="nav-in">
+  <div class="brand"><span class="logo" data-i="prompt" data-s="18"></span>ScriptBin <span class="tagadmin">ADMIN</span></div>
+  <a class="vsite" id="siteLink" href="./">View site<span data-i="ext" data-s="15"></span></a>
+</div></nav>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Publish a script</h1>
+    <p>Only you can publish. Everything is saved in your GitHub repository.</p>
   </div>
 
-  <!-- CONNECTION -->
-  <div class="card" id="connCard">
-    <div id="connOk" class="row hide">
+  <!-- 1 CONNECT -->
+  <section class="panel">
+    <div class="ph"><span class="step">1</span><div><b>Connect GitHub</b><small>One-time setup in this browser</small></div></div>
+    <div id="connOk" class="okrow hide">
       <span class="dot"></span>
-      <div class="grow"><b id="connName" style="font-size:14px"></b><div class="mute">Connected — only you can publish</div></div>
-      <button class="sm" id="changeBtn">Change</button>
+      <div class="grow"><b id="connName"></b><small>Connected. Only you can publish.</small></div>
+      <button class="btn2" id="changeBtn" type="button">Change</button>
     </div>
     <div id="connForm">
-      <h2>🔑 Connect your GitHub</h2>
-      <label>Personal access token</label>
-      <input type="password" id="token" placeholder="github_pat_..." autocomplete="off">
+      <label>Access token</label>
+      <input type="password" id="token" placeholder="github_pat_..." autocomplete="off" autocapitalize="off" spellcheck="false">
+      <details class="help">
+        <summary>How do I get a token?</summary>
+        <ol>
+          <li>GitHub &rarr; your profile picture &rarr; <b>Settings</b> &rarr; <b>Developer settings</b></li>
+          <li><b>Personal access tokens</b> &rarr; <b>Fine-grained tokens</b> &rarr; <b>Generate new token</b></li>
+          <li><b>Repository access</b>: Only select repositories &rarr; pick this repo</li>
+          <li><b>Permissions</b> &rarr; Repository permissions &rarr; <b>Contents: Read and write</b></li>
+          <li>Generate and copy it right away (shown only once)</li>
+        </ol>
+      </details>
       <div class="two">
-        <div><label>GitHub username</label><input type="text" id="owner" autocapitalize="off"></div>
-        <div><label>Repository</label><input type="text" id="repo" autocapitalize="off"></div>
+        <div><label>GitHub username</label><input type="text" id="owner" autocapitalize="off" autocomplete="off" spellcheck="false"></div>
+        <div><label>Repository name</label><input type="text" id="repo" autocapitalize="off" autocomplete="off" spellcheck="false"></div>
       </div>
       <label>Site URL</label>
-      <input type="text" id="site" autocapitalize="off">
-      <button class="btn" id="connect">Connect</button>
+      <input type="text" id="site" autocapitalize="off" autocomplete="off" spellcheck="false">
+      <button class="btn" id="connect" type="button">Connect</button>
       <div class="msg" id="connMsg"></div>
     </div>
-  </div>
+  </section>
 
-  <!-- PUBLISH -->
-  <div class="card hide" id="pubCard">
-    <h2>✍️ New script</h2>
+  <!-- 2 PUBLISH -->
+  <section class="panel hide" id="pubCard">
+    <div class="ph"><span class="step">2</span><div><b>New script</b><small>Appears on the home page right away</small></div></div>
     <label>Title</label>
-    <input type="text" id="title" placeholder="e.g. Auto farm script">
+    <input type="text" id="title" placeholder="e.g. Auto farm script" autocomplete="off">
     <label>Language</label>
     <select id="lang">
       <option>text</option><option>lua</option><option>javascript</option><option>python</option>
       <option>bash</option><option>html</option><option>css</option><option>java</option><option>c++</option><option>json</option>
     </select>
-    <label>Code <span id="chars" class="mute" style="float:right"></span></label>
-    <textarea id="code" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="Paste your script here…"></textarea>
+    <label>Code <span class="cnt" id="chars" style="float:right"></span></label>
+    <textarea id="code" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="Paste your script here"></textarea>
     <label class="sw"><input type="checkbox" id="listed" checked> Show on the public home page</label>
-    <button class="btn" id="pub">Publish</button>
+    <button class="btn" id="pub" type="button">Publish</button>
     <div class="msg" id="pubMsg"></div>
-  </div>
+  </section>
 
-  <!-- LIST -->
-  <div class="card hide" id="listCard">
-    <h2>📚 Your scripts</h2>
-    <div id="plist" class="mute">Loading…</div>
-  </div>
-</div>
+  <!-- 3 LIBRARY -->
+  <section class="panel hide" id="listCard">
+    <div class="lhead">
+      <div class="ph" style="margin:0"><span class="step">3</span><div><b>Your scripts</b><small id="lcount"></small></div></div>
+      <button class="btn2" id="rebuild" type="button">Refresh list</button>
+    </div>
+    <div id="plist" style="margin-top:10px"><div class="muted">Loading…</div></div>
+  </section>
+</main>
 
 <script>
 (function () {
-  var $ = function (id) { return document.getElementById(id); };
-  var cfg = { owner: "", repo: "", token: "", site: "" };
-  try { Object.assign(cfg, JSON.parse(localStorage.getItem("sv_cfg") || "{}")); } catch (e) {}
+  var $ = function (i) { return document.getElementById(i); };
+  var P = {
+    prompt: '<path d="M5 8l5 4-5 4"/><path d="M13 16h6"/>',
+    ext: '<path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/>',
+    link: '<path d="M10 13a5 5 0 007.5.5l3-3a5 5 0 00-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 00-7.5-.5l-3 3a5 5 0 007 7l1.7-1.7"/>',
+    trash: '<path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/>',
+    eye: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',
+    "eye-off": '<path d="M17.9 17.9A10.9 10.9 0 0112 20C5 20 1 12 1 12a18.5 18.5 0 015.1-5.9M9.9 4.2A9.1 9.1 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.2 3.2M14.1 14.1a3 3 0 11-4.2-4.2"/><path d="M1 1l22 22"/>',
+    check: '<path d="M20 6L9 17l-5-5"/>'
+  };
+  function ic(n, s) {
+    s = s || 18;
+    return '<svg viewBox="0 0 24 24" width="' + s + '" height="' + s + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + P[n] + '</svg>';
+  }
+  document.querySelectorAll("[data-i]").forEach(function (e) { e.innerHTML = ic(e.getAttribute("data-i"), +e.getAttribute("data-s") || 18); });
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 
-  // auto-fill from the page address
+  var cfg = { owner: "", repo: "", token: "", site: "" };
+  try { Object.assign(cfg, JSON.parse(localStorage.getItem("sv_cfg2") || "{}")); } catch (e) {}
   if (!cfg.owner && /github\.io$/.test(location.hostname)) cfg.owner = location.hostname.split(".")[0];
   if (!cfg.repo) cfg.repo = location.pathname.split("/")[1] || "";
   if (!cfg.site) cfg.site = location.origin + location.pathname.replace(/admin\.html.*$/, "");
   ["token", "owner", "repo", "site"].forEach(function (k) { $(k).value = cfg[k] || ""; });
   $("siteLink").href = cfg.site || "./";
 
-  function say(el, text, type) { el.className = "msg " + (type || ""); el.textContent = text; }
+  function say(e, text, type) { e.className = "msg " + (type || ""); e.textContent = text; }
   var enc = function (s) { return btoa(unescape(encodeURIComponent(s))); };
   var dec = function (b) { return decodeURIComponent(escape(atob(b.replace(/\n/g, "")))); };
 
+  function nice(e) {
+    var m = (e.message || "").toLowerCase();
+    if (e.status === 401) return "GitHub rejected the token (401). It is wrong, expired or copied with a missing part. Create a new token and paste it again.";
+    if (e.status === 403 || m.indexOf("not accessible") > -1) return "The token has no permission (403). When creating it, select this repository and set Permissions > Contents to \"Read and write\".";
+    if (e.status === 404) return "Not found (404). Check that the username is \"" + cfg.owner + "\", the repository is \"" + cfg.repo + "\", and that the token has access to that repository.";
+    if (e.status === 409 || e.status === 422) return "GitHub reported a conflict (" + e.status + "): " + e.message + ". Please try again.";
+    if (!e.status) return "Network problem. Check your internet connection and try again.";
+    return e.message;
+  }
+
   async function gh(path, method, body) {
-    var r = await fetch("https://api.github.com/repos/" + cfg.owner + "/" + cfg.repo + "/" + path, {
+    var url = "https://api.github.com/repos/" + cfg.owner + "/" + cfg.repo + (path ? "/" + path : "");
+    var r = await fetch(url, {
       method: method || "GET", cache: "no-store",
       headers: { Authorization: "Bearer " + cfg.token, Accept: "application/vnd.github+json" },
       body: body ? JSON.stringify(body) : undefined
     });
     var j = await r.json().catch(function () { return {}; });
-    if (!r.ok) { var e = new Error(j.message || r.status); e.status = r.status; throw e; }
+    if (!r.ok) { var e = new Error(j.message || String(r.status)); e.status = r.status; throw e; }
     return j;
   }
   async function readIndex() {
@@ -133,101 +198,136 @@ textarea{min-height:260px;resize:vertical;font:13px/1.6 ui-monospace,Menlo,Conso
     if (sha) b.sha = sha;
     return gh("contents/pastes/index.json", "PUT", b);
   }
+  // Scan the pastes folder and rebuild the public list (also picks up older scripts)
+  async function rebuild() {
+    var files;
+    try { files = await gh("contents/pastes"); } catch (e) { if (e.status === 404) files = []; else throw e; }
+    var old = await readIndex(), known = {};
+    old.list.forEach(function (p) { known[p.id] = p; });
+    var list = [];
+    for (var i = 0; i < files.length; i++) {
+      var f = files[i];
+      if (!/^[a-z0-9]{6,16}\.json$/.test(f.name)) continue;
+      var id = f.name.replace(".json", "");
+      try {
+        var j = await gh("contents/pastes/" + f.name), p = JSON.parse(dec(j.content));
+        list.push({ id: id, title: p.title || "Untitled", lang: p.lang || "text", date: p.date || "", listed: known[id] ? known[id].listed !== false : true, lines: (p.code || "").split("\n").length });
+      } catch (e) {}
+    }
+    list.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
+    await writeIndex(list, old.sha, "Rebuild script list");
+    return list;
+  }
 
-  /* ---- connect ---- */
+  /* ---------- connect ---------- */
   function showConnected() {
-    $("connForm").classList.add("hide");
-    $("connOk").classList.remove("hide");
+    $("connForm").classList.add("hide"); $("connOk").classList.remove("hide");
     $("connName").textContent = cfg.owner + " / " + cfg.repo;
-    $("pubCard").classList.remove("hide");
-    $("listCard").classList.remove("hide");
+    $("pubCard").classList.remove("hide"); $("listCard").classList.remove("hide");
     $("siteLink").href = cfg.site;
     loadList();
   }
   $("connect").onclick = async function () {
-    cfg.token = $("token").value.trim(); cfg.owner = $("owner").value.trim();
+    var btn = this;
+    cfg.token = $("token").value.replace(/\s+/g, ""); cfg.owner = $("owner").value.trim();
     cfg.repo = $("repo").value.trim(); cfg.site = $("site").value.trim();
     if (cfg.site && cfg.site.slice(-1) !== "/") cfg.site += "/";
-    if (!cfg.token || !cfg.owner || !cfg.repo || !cfg.site) return say($("connMsg"), "Fill every box.", "bad");
-    say($("connMsg"), "Checking…");
+    if (!cfg.token) return say($("connMsg"), "Paste your access token first.", "bad");
+    if (!cfg.owner || !cfg.repo || !cfg.site) return say($("connMsg"), "Fill in username, repository and site URL.", "bad");
+    btn.disabled = true; say($("connMsg"), "Connecting…");
     try {
-      var j = await gh("");
-      if (!j.permissions || !j.permissions.push) throw new Error("Token has no write access. Set Contents → Read and write.");
-      try { localStorage.setItem("sv_cfg", JSON.stringify(cfg)); } catch (e) {}
+      await gh("");
+      try { localStorage.setItem("sv_cfg2", JSON.stringify(cfg)); } catch (e) {}
       say($("connMsg"), ""); showConnected();
-    } catch (e) {
-      say($("connMsg"), e.status === 404 ? "Repo not found, or token has no access to it. Check username and repo name." : e.status === 401 ? "Token is wrong or expired. Make a new one." : e.message, "bad");
-    }
+    } catch (e) { say($("connMsg"), nice(e), "bad"); }
+    btn.disabled = false;
   };
   $("changeBtn").onclick = function () {
     $("connForm").classList.remove("hide"); $("connOk").classList.add("hide");
     $("pubCard").classList.add("hide"); $("listCard").classList.add("hide");
   };
 
-  /* ---- publish ---- */
-  $("code").addEventListener("input", function () { $("chars").textContent = this.value.length + " chars"; });
+  /* ---------- publish ---------- */
+  $("code").addEventListener("input", function () { $("chars").textContent = this.value.length + " characters"; });
   function rid() {
     var c = "abcdefghijklmnopqrstuvwxyz0123456789", s = "", a = new Uint8Array(8);
     crypto.getRandomValues(a); for (var i = 0; i < 8; i++) s += c[a[i] % c.length]; return s;
   }
   $("pub").onclick = async function () {
     var btn = this, code = $("code").value;
-    if (!code.trim()) return say($("pubMsg"), "Code is empty.", "bad");
+    if (!code.trim()) return say($("pubMsg"), "The code box is empty.", "bad");
     var id = rid();
-    var meta = { id: id, title: $("title").value.trim() || "Untitled", lang: $("lang").value, date: new Date().toISOString().slice(0, 10), listed: $("listed").checked };
+    var meta = { id: id, title: $("title").value.trim() || "Untitled", lang: $("lang").value, date: new Date().toISOString().slice(0, 10), listed: $("listed").checked, lines: code.split("\n").length };
     btn.disabled = true; say($("pubMsg"), "Publishing…");
+    var step = "file";
     try {
-      await gh("contents/pastes/" + id + ".json", "PUT", { message: "Add paste " + id, content: enc(JSON.stringify({ title: meta.title, lang: meta.lang, date: meta.date, code: code })) });
-      var ix = await readIndex();
-      ix.list.unshift(meta);
-      await writeIndex(ix.list, ix.sha, "Index: add " + id);
+      await gh("contents/pastes/" + id + ".json", "PUT", { message: "Add script " + id, content: enc(JSON.stringify({ title: meta.title, lang: meta.lang, date: meta.date, code: code })) });
+      step = "index";
+      var ix = await readIndex(); ix.list.unshift(meta);
+      await writeIndex(ix.list, ix.sha, "List: add " + id);
       var link = cfg.site + "?id=" + id;
-      $("pubMsg").className = "msg ok"; $("pubMsg").innerHTML = "";
-      $("pubMsg").append("✅ Published. Goes live in about a minute:\n");
-      var a = document.createElement("a"); a.href = link; a.textContent = link; $("pubMsg").append(document.createElement("br"), a);
-      var cp = document.createElement("button"); cp.className = "sm"; cp.style.marginTop = "10px"; cp.style.display = "block"; cp.textContent = "Copy link";
-      cp.onclick = function () { navigator.clipboard.writeText(link); cp.textContent = "Copied ✓"; };
-      $("pubMsg").append(cp);
+      var m = $("pubMsg"); m.className = "msg ok"; m.innerHTML = "";
+      m.append(document.createTextNode("Published. Your link:"), document.createElement("br"));
+      var a = el("a", "", link); a.href = link; a.target = "_blank"; m.append(a, document.createElement("br"));
+      var cp = el("button", "btn2", "Copy link"); cp.type = "button";
+      cp.onclick = function () { navigator.clipboard.writeText(link); cp.textContent = "Copied"; };
+      m.append(cp);
       $("code").value = ""; $("title").value = ""; $("chars").textContent = "";
       loadList();
-    } catch (e) { say($("pubMsg"), "Failed: " + e.message, "bad"); }
+    } catch (e) {
+      say($("pubMsg"), (step === "index" ? "The script was saved, but updating the home list failed. Tap \"Refresh list\" below. " : "") + nice(e), "bad");
+    }
     btn.disabled = false;
   };
 
-  /* ---- list / delete ---- */
-  async function loadList() {
-    var box = $("plist"); box.className = "mute"; box.textContent = "Loading…";
-    try {
-      var ix = await readIndex(); box.innerHTML = "";
-      if (!ix.list.length) { box.textContent = "Nothing published yet."; return; }
-      ix.list.forEach(function (p) {
-        var row = document.createElement("div"); row.className = "pi";
-        var g = document.createElement("div"); g.className = "grow";
-        var b = document.createElement("b"); b.textContent = p.title;
-        var s = document.createElement("small"); s.textContent = p.lang + " · " + p.date + (p.listed === false ? " · unlisted" : "");
-        g.append(b, s);
-        var acts = document.createElement("div"); acts.className = "acts";
-        var c = document.createElement("button"); c.className = "sm"; c.textContent = "Link";
-        c.onclick = function () { navigator.clipboard.writeText(cfg.site + "?id=" + p.id); c.textContent = "Copied"; setTimeout(function () { c.textContent = "Link"; }, 1500); };
-        var d = document.createElement("button"); d.className = "sm del"; d.textContent = "Delete";
-        d.onclick = function () { removePaste(p, d); };
-        acts.append(c, d); row.append(g, acts); box.append(row);
-      });
-    } catch (e) { box.textContent = "Could not load list: " + e.message; }
+  /* ---------- library ---------- */
+  function ib(name, title, cls) {
+    var b = el("button", "ib " + (cls || "")); b.type = "button"; b.title = title; b.setAttribute("aria-label", title); b.innerHTML = ic(name, 16); return b;
   }
-  async function removePaste(p, btn) {
-    if (!confirm("Delete \"" + p.title + "\"?")) return;
-    btn.disabled = true; btn.textContent = "…";
+  async function loadList(forceRebuild) {
+    var box = $("plist"); box.innerHTML = ""; box.append(el("div", "muted", "Loading…"));
     try {
-      try { var f = await gh("contents/pastes/" + p.id + ".json"); await gh("contents/pastes/" + p.id + ".json", "DELETE", { message: "Delete paste " + p.id, sha: f.sha }); }
-      catch (e) { if (e.status !== 404) throw e; }
-      var ix = await readIndex();
-      await writeIndex(ix.list.filter(function (x) { return x.id !== p.id; }), ix.sha, "Index: remove " + p.id);
+      var ix = await readIndex(), list = ix.list;
+      if (forceRebuild || !ix.sha) list = await rebuild();
+      box.innerHTML = "";
+      $("lcount").textContent = list.length + (list.length === 1 ? " script" : " scripts");
+      if (!list.length) { box.append(el("div", "muted", "Nothing published yet.")); return; }
+      list.forEach(function (p) {
+        var row = el("div", "pi"), t = el("div", "t");
+        var a = el("a", "", p.title); a.href = cfg.site + "?id=" + p.id; a.target = "_blank";
+        t.append(a, el("small", "", [p.lang, p.date, p.lines ? p.lines + " lines" : "", p.listed === false ? "hidden" : "public"].filter(Boolean).join("  ·  ")));
+        var c = ib("link", "Copy link");
+        c.onclick = function () { navigator.clipboard.writeText(cfg.site + "?id=" + p.id); c.innerHTML = ic("check", 16); setTimeout(function () { c.innerHTML = ic("link", 16); }, 1400); };
+        var v = ib(p.listed === false ? "eye-off" : "eye", p.listed === false ? "Hidden from home. Tap to show" : "Public. Tap to hide");
+        v.onclick = function () { toggle(p, v); };
+        var d = ib("trash", "Delete", "dg"); d.onclick = function () { remove(p, d); };
+        row.append(t, c, v, d); box.append(row);
+      });
+    } catch (e) { box.innerHTML = ""; var m = el("div", "msg bad"); m.textContent = nice(e); box.append(m); }
+  }
+  $("rebuild").onclick = function () { loadList(true); };
+  async function toggle(p, btn) {
+    btn.disabled = true;
+    try {
+      var ix = await readIndex(), q = ix.list.find(function (x) { return x.id === p.id; });
+      if (q) { q.listed = q.listed === false; await writeIndex(ix.list, ix.sha, "List: toggle " + p.id); }
       loadList();
-    } catch (e) { alert("Delete failed: " + e.message); btn.disabled = false; btn.textContent = "Delete"; }
+    } catch (e) { alert(nice(e)); btn.disabled = false; }
+  }
+  async function remove(p, btn) {
+    if (!confirm("Delete \"" + p.title + "\"? This cannot be undone.")) return;
+    btn.disabled = true;
+    try {
+      try {
+        var f = await gh("contents/pastes/" + p.id + ".json");
+        await gh("contents/pastes/" + p.id + ".json", "DELETE", { message: "Delete script " + p.id, sha: f.sha });
+      } catch (e) { if (e.status !== 404) throw e; }
+      var ix = await readIndex();
+      await writeIndex(ix.list.filter(function (x) { return x.id !== p.id; }), ix.sha, "List: remove " + p.id);
+      loadList();
+    } catch (e) { alert(nice(e)); btn.disabled = false; }
   }
 
-  // auto-connect if a token is already saved
   if (cfg.token) $("connect").click();
 })();
 </script>
