@@ -21,7 +21,7 @@ svg{display:block;flex:none}
 .nav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
 .nav-in{max-width:720px;margin:0 auto;height:58px;padding:0 16px;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:10px;font-weight:750;font-size:17px;letter-spacing:-.2px}
-.logo{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
+.brand-ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
 .tag{font-size:10.5px;font-weight:700;letter-spacing:.8px;color:#a5b4fc;background:rgba(99,102,241,.14);border:1px solid rgba(99,102,241,.35);padding:2px 8px;border-radius:99px}
 .right{display:flex;align-items:center;gap:12px}
 .sitelink{color:var(--mute);font-size:14px;text-decoration:none}
@@ -30,20 +30,26 @@ svg{display:block;flex:none}
 .theme:hover{border-color:var(--acc)}
 @keyframes spin{from{transform:rotate(-180deg) scale(.6);opacity:.3}to{transform:none;opacity:1}}
 .theme.spin{animation:spin .5s ease}
+.hero{padding:30px 0 16px}
+.hero h1{font-size:28px;letter-spacing:-.8px;margin:0 0 6px;font-weight:800}
+.hero p{margin:0;color:var(--mute)}
 .panel{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:16px;box-shadow:var(--sh)}
 .ph{display:flex;align-items:center;gap:12px;margin-bottom:4px}
 .step{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:700;font-size:14px;background:var(--glow);color:var(--acc);border:1px solid var(--line2)}
 .ph b{display:block;font-size:16px}
 .ph small,.muted,.cnt{color:var(--mute);font-size:13px}
-label.l{display:block;font-size:12.5px;font-weight:500;color:var(--mute);margin:16px 0 7px}
-input[type=text],input[type=password],select,textarea{width:100%;padding:0 14px;height:46px;border-radius:11px;border:1px solid var(--line2);background:var(--bg);color:var(--text);font-size:16px;outline:none}
+.sub{font-size:13px;color:var(--mute);margin:14px 0 0;font-weight:600;letter-spacing:.2px}
+label.l{display:block;font-size:12.5px;font-weight:500;color:var(--mute);margin:14px 0 7px}
+input[type=text],input[type=password],input[type=email],select,textarea{width:100%;padding:0 14px;height:46px;border-radius:11px;border:1px solid var(--line2);background:var(--bg);color:var(--text);font-size:16px;outline:none}
 select{appearance:none;-webkit-appearance:none;padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b94a7' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center}
-textarea{height:auto;min-height:240px;padding:14px;resize:vertical;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+textarea{height:auto;min-height:110px;padding:12px 14px;resize:vertical;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px var(--glow)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.btn{width:100%;margin-top:18px;height:48px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-size:15.5px;font-weight:600;cursor:pointer}
+.btn{width:100%;margin-top:16px;height:48px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-size:15.5px;font-weight:600;cursor:pointer}
 .btn:disabled{opacity:.55;cursor:wait}
-.btn2{padding:9px 14px;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--text);font-size:13px;cursor:pointer;margin-top:10px}
+.btn.sec{background:var(--s3);color:var(--text);border:1px solid var(--line2);font-weight:500}
+.btn2{padding:9px 14px;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--text);font-size:13px;cursor:pointer;margin-top:10px;display:inline-flex;align-items:center;gap:6px}
+.btn2:disabled{opacity:.5}
 .okrow{display:flex;align-items:center;gap:12px;margin-top:10px}
 .dot{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(34,197,94,.15);flex:none}
 .grow{flex:1;min-width:0}
@@ -55,6 +61,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0
 .help b{color:var(--text);font-weight:600}
 .msg{margin-top:14px;font-size:14px;line-height:1.5;word-break:break-word;color:var(--ok)}
 .msg.bad{color:#fca5a5;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);padding:12px 14px;border-radius:10px}
+.msg.info{color:var(--mute)}
 .msg a{color:#86efac;word-break:break-all}
 .switch{position:relative;display:inline-block;width:46px;height:26px;flex:none}
 .switch input{opacity:0;width:0;height:0;position:absolute}
@@ -62,12 +69,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0
 .switch span::before{content:"";position:absolute;width:20px;height:20px;left:2px;top:2px;background:#fff;border-radius:50%;transition:.25s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
 .switch input:checked+span{background:var(--acc);border-color:var(--acc)}
 .switch input:checked+span::before{transform:translateX(20px)}
-.row2{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
-.row2:first-of-type{border-top:0}
+.row2{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 0}
 .row2 b{display:block}
 .masterrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;margin-top:14px;border-radius:12px;background:var(--s2);border:1px solid var(--line)}
 .adblock{margin-top:12px;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--s2)}
-.adblock textarea{min-height:110px;margin-top:12px;font-size:12.5px}
+.adblock textarea{margin-top:12px}
+.checkrow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--s2);border:1px solid var(--line)}
+.checkrow b{display:block}
 .file{display:block;width:100%;margin-top:4px;color:var(--mute);font-size:14px}
 .file::file-selector-button{margin-right:12px;padding:9px 14px;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--text);cursor:pointer}
 .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
@@ -77,29 +85,42 @@ input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0
 .tb{width:28px;height:28px;border-radius:8px;border:0;background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center;cursor:pointer}
 .tb:disabled{opacity:.3;cursor:default}
 .tb.x{background:rgba(239,68,68,.85)}
+.gamebox{margin-top:14px;padding:14px;border-radius:12px;background:var(--s2);border:1px solid var(--line)}
+.gamerow{display:flex;gap:10px;align-items:center}
+.gamerow input{flex:1;min-width:0}
+.gprev{display:flex;align-items:center;gap:12px;margin-top:12px}
+.glogo{width:56px;height:56px;flex:none;border-radius:12px;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-weight:700;font-size:22px;border:1px solid var(--line2)}
+.glogo img{width:100%;height:100%;object-fit:cover;display:block}
 .lhead{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.lhead .btn2{margin-top:0}
 .row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
 .row:first-child{border-top:0}
 .th{width:64px;height:40px;flex:none;border-radius:8px;overflow:hidden;background:var(--s3);display:grid;place-items:center;color:var(--mute)}
 .th img{width:100%;height:100%;object-fit:cover;display:block}
 .rt{flex:1;min-width:0}
 .rt a{display:block;color:var(--text);font-weight:600;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.acts{display:flex;gap:6px;flex:none}
-.ib{width:36px;height:36px;display:grid;place-items:center;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--mute);cursor:pointer}
+.rt small{color:var(--mute);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.acts{display:flex;gap:6px;flex:none;flex-wrap:wrap;justify-content:flex-end;max-width:170px}
+.ib{width:34px;height:34px;display:grid;place-items:center;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--mute);cursor:pointer}
 .ib:hover{color:var(--text);border-color:var(--acc)}
+.ib.on{color:#fcd34d;border-color:rgba(245,158,11,.5)}
 .ib.dg:hover{color:var(--bad);border-color:var(--bad)}
 .ib:disabled{opacity:.4}
 </style>
 </head>
 <body>
 <header class="nav"><div class="nav-in">
-  <div class="brand"><span class="logo" id="logo"></span>ScriptBin <span class="tag">ADMIN</span></div>
+  <div class="brand"><span class="brand-ic" id="logo"></span>ScriptBin <span class="tag">ADMIN</span></div>
   <div class="right"><a class="sitelink" id="site" href="./">View site</a><button class="theme" id="theme" type="button" aria-label="Switch theme"></button></div>
 </div></header>
 
 <main class="wrap">
-  <section class="panel" id="connPanel">
+  <div class="hero">
+    <h1>Manage scripts</h1>
+    <p>Only you can publish. Everything is saved in your GitHub repository.</p>
+  </div>
+
+  <!-- 1. CONNECT -->
+  <section class="panel">
     <div class="ph"><span class="step">1</span><div><b>Connect GitHub</b><small>Saved in this browser only</small></div></div>
     <div id="connOk" class="okrow hide"><span class="dot"></span><div class="grow"><b id="connName"></b><small>Connected. Only you can publish.</small></div><button class="btn2" id="change" type="button">Change</button></div>
     <div id="connForm">
@@ -126,32 +147,55 @@ input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0
     </div>
   </section>
 
-  <section class="panel hide" id="adsPanel">
-    <div class="ph"><span class="step">2</span><div><b>Ads</b><small>Turn any ad on or off. Changes reach the site within a few minutes.</small></div></div>
-    <div class="masterrow"><div><b>All ads</b><small id="masterState" class="muted"></small></div><label class="switch"><input type="checkbox" id="adsOn"><span></span></label></div>
+  <!-- 2. SETTINGS -->
+  <section class="panel hide" id="setPanel">
+    <div class="ph"><span class="step">2</span><div><b>Report settings</b><small>Where "Not working" and "Report" messages go</small></div></div>
+    <div class="checkrow"><div><b>Show report buttons</b><small class="muted">Off hides both buttons on every script</small></div><label class="switch"><input type="checkbox" id="repOn"><span></span></label></div>
+    <label class="l">Receiving email address</label>
+    <input type="email" id="repEmail" placeholder="you@example.com" autocapitalize="off" autocomplete="off">
+    <div class="sub">"Not working" message</div>
+    <label class="l">Subject</label>
+    <input type="text" id="brSubj" autocomplete="off">
+    <label class="l">Message</label>
+    <textarea id="brBody"></textarea>
+    <div class="sub">"Report" message</div>
+    <label class="l">Subject</label>
+    <input type="text" id="rpSubj" autocomplete="off">
+    <label class="l">Message</label>
+    <textarea id="rpBody"></textarea>
+    <p class="muted" style="margin:12px 0 0">Placeholders filled in automatically: <b>{title}</b> <b>{game}</b> <b>{date}</b> <b>{url}</b> <b>{id}</b> <b>{status}</b> <b>{changelog}</b></p>
+    <button class="btn" id="saveSet" type="button">Save settings</button>
+    <button class="btn2" id="resetSet" type="button">Reset messages to default</button>
+    <div class="msg" id="setMsg"></div>
+  </section>
 
+  <!-- 3. ADS -->
+  <section class="panel hide" id="adsPanel">
+    <div class="ph"><span class="step">3</span><div><b>Ads</b><small>Turn any ad on or off. Changes reach the site within a few minutes.</small></div></div>
+    <div class="masterrow"><div><b>All ads</b><small id="masterState" class="muted"></small></div><label class="switch"><input type="checkbox" id="adsOn"><span></span></label></div>
     <div class="adblock">
-      <div class="row2" style="border:0;padding:0"><div><b>Popunder</b><small class="muted">Opens on the captcha clicks</small></div><label class="switch"><input type="checkbox" id="popOn"><span></span></label></div>
+      <div class="row2"><div><b>Popunder</b><small class="muted">Fires on the captcha clicks</small></div><label class="switch"><input type="checkbox" id="popOn"><span></span></label></div>
       <textarea id="popCode" spellcheck="false" placeholder="Paste the popunder code here"></textarea>
     </div>
     <div class="adblock">
-      <div class="row2" style="border:0;padding:0"><div><b>Banner 300×250</b><small class="muted">Under each script in the list, and under the code after unlock</small></div><label class="switch"><input type="checkbox" id="banOn"><span></span></label></div>
+      <div class="row2"><div><b>Banner 300×250</b><small class="muted">Under each script in the list, in the cover slideshow, and under the code after unlock</small></div><label class="switch"><input type="checkbox" id="banOn"><span></span></label></div>
       <textarea id="banCode" spellcheck="false" placeholder="Paste the banner code here"></textarea>
     </div>
     <div class="adblock">
-      <div class="row2" style="border:0;padding:0"><div><b>Native</b><small class="muted">Replaces the banner in the list when on</small></div><label class="switch"><input type="checkbox" id="natOn"><span></span></label></div>
+      <div class="row2"><div><b>Native</b><small class="muted">Replaces the banner between list cards when on</small></div><label class="switch"><input type="checkbox" id="natOn"><span></span></label></div>
       <textarea id="natCode" spellcheck="false" placeholder="Paste the native code here"></textarea>
     </div>
     <div class="adblock">
-      <div class="row2" style="border:0;padding:0"><div><b>Smartlink</b><small class="muted">Opens in a new tab when the visitor presses Copy</small></div><label class="switch"><input type="checkbox" id="smOn"><span></span></label></div>
+      <div class="row2"><div><b>Smartlink</b><small class="muted">Opens in a new tab when the visitor presses Copy</small></div><label class="switch"><input type="checkbox" id="smOn"><span></span></label></div>
       <input type="text" id="smUrl" style="margin-top:12px" placeholder="https://..." autocapitalize="off" spellcheck="false">
     </div>
     <button class="btn" id="saveAds" type="button">Save ads</button>
     <div class="msg" id="adsMsg"></div>
   </section>
 
+  <!-- 4. EDITOR -->
   <section class="panel hide" id="editPanel">
-    <div class="ph"><span class="step">3</span><div><b id="editTitle">New script</b><small id="editSub">Appears on the home page after publishing</small></div></div>
+    <div class="ph"><span class="step">4</span><div><b id="editTitle">New script</b><small id="editSub">Appears on the home page after publishing</small></div></div>
     <label class="l">Title</label>
     <input type="text" id="title" placeholder="e.g. Auto farm script" autocomplete="off">
     <div class="two">
@@ -163,19 +207,52 @@ input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0
       <div><label class="l">Visibility</label>
         <select id="vis"><option value="1">Public</option><option value="0">Hidden</option></select></div>
     </div>
+    <div class="two">
+      <div><label class="l">Status</label>
+        <select id="status">
+          <option value="">None</option><option value="working">Working</option><option value="updated">Updated</option><option value="broken">Not working</option>
+        </select></div>
+      <div><label class="l">Pinned to top</label>
+        <div class="checkrow" style="margin-top:0;height:46px;padding:0 14px"><span class="muted">Show first on home</span><label class="switch"><input type="checkbox" id="pinned"><span></span></label></div></div>
+    </div>
+    <label class="l">Changelog note <span class="cnt">(shows under the title, optional)</span></label>
+    <input type="text" id="changelog" placeholder="e.g. Fixed the teleport bug" autocomplete="off">
+
+    <div class="gamebox">
+      <label class="l" style="margin-top:0">Game</label>
+      <div class="gamerow">
+        <input type="text" id="gLink" placeholder="Roblox game link or game ID" autocapitalize="off" autocomplete="off" spellcheck="false">
+        <button class="btn2" id="fetchGame" type="button" style="margin-top:0">Fetch</button>
+      </div>
+      <label class="l">Game name</label>
+      <input type="text" id="gName" placeholder="e.g. Blox Fruits" autocomplete="off">
+      <div class="gprev">
+        <div class="glogo" id="gPrev"></div>
+        <div class="grow">
+          <input type="file" id="gFile" class="file" accept="image/*">
+          <button class="btn2" id="gClear" type="button">Remove logo</button>
+        </div>
+      </div>
+      <label class="l">Or logo image URL</label>
+      <input type="text" id="gUrl" placeholder="https://..." autocapitalize="off" autocomplete="off" spellcheck="false">
+      <div class="msg info" id="gMsg">Logo order: uploaded logo, then logo URL, then the icon from Roblox, then a letter.</div>
+    </div>
+
     <label class="l">Cover images <span class="cnt" id="imgHint">0 of 4 images</span></label>
     <input type="file" id="imgs" class="file" accept="image/*" multiple>
     <div class="thumbs" id="thumbs"></div>
+
     <label class="l">Code <span class="cnt" id="chars" style="float:right"></span></label>
-    <textarea id="code" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="Paste the script here"></textarea>
+    <textarea id="code" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="Paste the script here" style="min-height:220px"></textarea>
     <button class="btn" id="publish" type="button">Publish</button>
-    <button class="btn2 hide" id="cancelEdit" type="button" style="width:100%;margin-top:8px">Cancel edit</button>
+    <button class="btn sec hide" id="cancelEdit" type="button">Cancel edit</button>
     <div class="msg" id="pubMsg"></div>
   </section>
 
+  <!-- 5. LIBRARY -->
   <section class="panel hide" id="libPanel">
     <div class="lhead">
-      <div class="ph" style="margin:0"><span class="step">4</span><div><b>Library</b><small id="lcount"></small></div></div>
+      <div class="ph" style="margin:0"><span class="step">5</span><div><b>Library</b><small id="lcount"></small></div></div>
       <button class="btn2" id="rebuild" type="button">Rebuild list</button>
     </div>
     <div id="plist" style="margin-top:8px"></div>
@@ -199,10 +276,14 @@ const P={
  eye:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',
  eyeoff:'<path d="M17.9 17.9A10.9 10.9 0 0 1 12 20C5 20 1 12 1 12a18.5 18.5 0 0 1 5.1-5.9M9.9 4.2A9.1 9.1 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.2 3.2M14.1 14.1a3 3 0 1 1-4.2-4.2"/><path d="M1 1l22 22"/>',
  trash:'<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>',
- check:'<path d="M20 6L9 17l-5-5"/>'
+ check:'<path d="M20 6L9 17l-5-5"/>',
+ pin:'<path d="M12 17v5"/><path d="M9 3h6l-1 6 3 3H7l3-3z"/>',
+ code2:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 9l-3 3 3 3M16 9l3 3-3 3"/>'
 };
 const ic=(n,s=18)=>'<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(P[n]||'')+'</svg>';
 const put=(id,n,s)=>{const e=$(id);if(e)e.innerHTML=ic(n,s);};
+const STATUS={working:'Working',updated:'Updated',broken:'Not working'};
+const stamp=p=>p.at||(p.date?Date.parse(p.date):0)||0;
 function ago(ts){
   if(!ts) return '';
   const s=Math.max(0,(Date.now()-ts)/1000);
@@ -217,7 +298,7 @@ function ago(ts){
 
 /* theme */
 const root=document.documentElement;
-function paintTheme(){ put('theme', root.dataset.theme==='dark'?'sun':'moon', 18); }
+function paintTheme(){put('theme',root.dataset.theme==='dark'?'sun':'moon',18);}
 $('theme').onclick=function(){
   const next=root.dataset.theme==='dark'?'light':'dark';
   root.classList.add('fade'); root.dataset.theme=next; localStorage.setItem('sb-theme',next);
@@ -227,8 +308,8 @@ $('theme').onclick=function(){
 };
 paintTheme(); put('logo','code',18);
 
-/* config */
-const KEY='sb-cfg3';
+/* config and defaults */
+const KEY='sb-cfg4';
 const cfg={owner:'',repo:'',token:'',site:''};
 try{Object.assign(cfg,JSON.parse(localStorage.getItem(KEY)||'{}'));}catch(e){}
 if(!cfg.owner&&/github\.io$/.test(location.hostname)) cfg.owner=location.hostname.split('.')[0];
@@ -236,52 +317,77 @@ if(!cfg.repo) cfg.repo=location.pathname.split('/')[1]||'';
 if(!cfg.site) cfg.site=location.origin+location.pathname.replace(/admin\.html.*$/,'');
 $('connToken').value=cfg.token||''; $('connOwner').value=cfg.owner||''; $('connRepo').value=cfg.repo||''; $('connSite').value=cfg.site||'';
 $('site').href=cfg.site||'./';
+const DEF_SETTINGS={reportOn:true,email:'',
+  brokenSubject:'Not working: {title}',
+  brokenBody:'Hi,\n\nThe script below is not working for me.\n\nScript: {title}\nGame: {game}\nUploaded: {date}\nLink: {url}\n\nWhat happened:\n',
+  reportSubject:'Report: {title}',
+  reportBody:'Hi,\n\nI want to report a problem with this script.\n\nScript: {title}\nGame: {game}\nLink: {url}\n\nWhat went wrong:\n'};
+let SET=Object.assign({},DEF_SETTINGS);
+const EXCLUDE=['index','ads','settings'];
 
-const enc=s=>btoa(unescape(encodeURIComponent(s)));
-const dec=b=>decodeURIComponent(escape(atob(b.replace(/\n/g,''))));
-function say(id,text,type){const e=$(id);e.className='msg'+(type==='bad'?' bad':'');e.textContent=text;}
+/* helpers */
+const enc=s=>{const b=new TextEncoder().encode(s);let bin='';b.forEach(x=>bin+=String.fromCharCode(x));return btoa(bin);};
+const dec=b=>{const bin=atob(b.replace(/\n/g,''));return new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0)));};
+function say(id,text,type){const e=$(id);e.className='msg'+(type==='bad'?' bad':(type==='info'?' info':''));e.textContent=text;}
 function nice(e){
   const m=(e&&e.message)||'';
   if(e.status===401) return 'GitHub rejected the token (401). It is wrong, expired, or part of it went missing. Create a new token and paste it again.';
   if(e.status===403||m==='nopush') return 'The token has no permission to write here (403). Set Repository permissions → Contents to "Read and write" and select this repository.';
-  if(e.status===404) return 'Not found (404). Check the username ("'+cfg.owner+'"), the repository name ("'+cfg.repo+'"), and that the token has access to that repository.';
+  if(e.status===404) return 'Not found (404). Check the username ("'+cfg.owner+'"), the repository name ("'+cfg.repo+'"), and that the token has access to it.';
   if(e.status===422||e.status===409) return 'GitHub reported a conflict ('+e.status+'). Try again in a moment.';
   if(!e.status) return 'Network problem. Check your internet connection and try again.';
   return m;
 }
+const rid=()=>{const c='abcdefghijklmnopqrstuvwxyz0123456789';const a=new Uint8Array(8);crypto.getRandomValues(a);let s='';for(let i=0;i<8;i++)s+=c[a[i]%c.length];return s;};
 
-/* GitHub helpers */
-async function gh(path,method='GET',body,raw){
+/* GitHub */
+async function gh(path,method='GET',body){
   const url='https://api.github.com/repos/'+cfg.owner+'/'+cfg.repo+(path?'/'+path:'');
   const r=await fetch(url,{method,cache:'no-store',
-    headers:{Authorization:'Bearer '+cfg.token,Accept:raw?'application/vnd.github.raw+json':'application/vnd.github+json'},
+    headers:{Authorization:'Bearer '+cfg.token,Accept:'application/vnd.github+json'},
     body:body?JSON.stringify(body):undefined});
-  if(raw){ if(!r.ok){const e=new Error(String(r.status));e.status=r.status;throw e;} return r.text(); }
   const j=await r.json().catch(()=>({}));
   if(!r.ok){const e=new Error(j.message||String(r.status));e.status=r.status;throw e;}
   return j;
 }
 async function getFile(path){
-  try{
-    const meta=await gh('contents/'+path);
-    const text=await gh('contents/'+path,'GET',null,true);
-    return {sha:meta.sha,text};
-  }catch(e){ if(e.status===404) return null; throw e; }
+  try{ const j=await gh('contents/'+path); return {sha:j.sha,text:dec(j.content||'')}; }
+  catch(e){ if(e.status===404) return null; throw e; }
 }
-function putFile(path,text,sha,msg){
+async function putFile(path,text,sha,msg){
   const b={message:msg,content:enc(text)}; if(sha) b.sha=sha;
   return gh('contents/'+path,'PUT',b);
+}
+async function putBin(path,dataUrl,msg){
+  return gh('contents/'+path,'PUT',{message:msg,content:dataUrl.split(',')[1]});
+}
+async function delPath(path){
+  try{
+    const j=await gh('contents/'+path);
+    await gh('contents/'+path,'DELETE',{message:'Remove '+path,sha:j.sha});
+  }catch(e){ if(e.status!==404) throw e; }
 }
 async function readIndex(){
   const f=await getFile('pastes/index.json');
   return {sha:f?f.sha:null,list:f?(JSON.parse(f.text)||[]):[]};
 }
 function writeIndex(list,sha,msg){
+  list.sort((a,b)=>stamp(b)-stamp(a));
   return putFile('pastes/index.json',JSON.stringify(list),sha,msg);
 }
-const rid=()=>{const c='abcdefghijklmnopqrstuvwxyz0123456789';const a=new Uint8Array(8);crypto.getRandomValues(a);let s='';for(let i=0;i<8;i++)s+=c[a[i]%c.length];return s;};
+function entryOf(p){
+  return {id:p.id,title:p.title,lang:p.lang,at:p.at,listed:p.listed!==false,pinned:!!p.pinned,
+    status:p.status||'',changelog:p.changelog||'',game:p.game||{},images:p.images||[],lines:(p.code||'').split('\n').length};
+}
 
 /* connect */
+function showConnected(){
+  $('connForm').classList.add('hide'); $('connOk').classList.remove('hide');
+  $('connName').textContent=cfg.owner+' / '+cfg.repo;
+  $('site').href=cfg.site;
+  ['setPanel','adsPanel','editPanel','libPanel'].forEach(i=>$(i).classList.remove('hide'));
+  loadSettings(); loadAds(); loadLib();
+}
 $('connect').onclick=async function(){
   cfg.token=$('connToken').value.replace(/\s+/g,'');
   cfg.owner=$('connOwner').value.trim();
@@ -289,26 +395,47 @@ $('connect').onclick=async function(){
   let s=$('connSite').value.trim(); if(s&&s.slice(-1)!=='/') s+='/'; cfg.site=s;
   if(!cfg.token) return say('connMsg','Paste your access token first.','bad');
   if(!cfg.owner||!cfg.repo||!cfg.site) return say('connMsg','Fill in username, repository and site URL.','bad');
-  this.disabled=true; say('connMsg','Connecting…');
+  this.disabled=true; say('connMsg','Connecting…','info');
   try{
     const j=await gh('');
     if(j.permissions&&!j.permissions.push){const e=new Error('nopush');e.status=403;throw e;}
     localStorage.setItem(KEY,JSON.stringify(cfg));
-    say('connMsg',''); $('connMsg').className='msg';
-    showConnected();
+    say('connMsg',''); showConnected();
   }catch(e){ say('connMsg',nice(e),'bad'); }
   this.disabled=false;
 };
-function showConnected(){
-  $('connForm').classList.add('hide'); $('connOk').classList.remove('hide');
-  $('connName').textContent=cfg.owner+' / '+cfg.repo;
-  $('site').href=cfg.site;
-  ['adsPanel','editPanel','libPanel'].forEach(i=>$(i).classList.remove('hide'));
-  loadAds(); loadLib();
-}
 $('change').onclick=()=>{
   $('connForm').classList.remove('hide'); $('connOk').classList.add('hide');
-  ['adsPanel','editPanel','libPanel'].forEach(i=>$(i).classList.add('hide'));
+  ['setPanel','adsPanel','editPanel','libPanel'].forEach(i=>$(i).classList.add('hide'));
+};
+
+/* settings */
+function paintSettings(){
+  $('repOn').checked=!!SET.reportOn; $('repEmail').value=SET.email||'';
+  $('brSubj').value=SET.brokenSubject||''; $('brBody').value=SET.brokenBody||'';
+  $('rpSubj').value=SET.reportSubject||''; $('rpBody').value=SET.reportBody||'';
+}
+async function loadSettings(){
+  try{ const f=await getFile('pastes/settings.json'); SET=Object.assign({},DEF_SETTINGS,f?JSON.parse(f.text):{}); paintSettings(); }
+  catch(e){ say('setMsg',nice(e),'bad'); }
+}
+$('resetSet').onclick=()=>{
+  SET=Object.assign({},SET,{brokenSubject:DEF_SETTINGS.brokenSubject,brokenBody:DEF_SETTINGS.brokenBody,reportSubject:DEF_SETTINGS.reportSubject,reportBody:DEF_SETTINGS.reportBody});
+  paintSettings(); say('setMsg','Messages reset. Press Save settings to keep them.','info');
+};
+$('saveSet').onclick=async function(){
+  const email=$('repEmail').value.trim();
+  if($('repOn').checked&&!/^\S+@\S+\.\S+$/.test(email)) return say('setMsg','Enter a valid receiving email address.','bad');
+  const data={reportOn:$('repOn').checked,email,
+    brokenSubject:$('brSubj').value,brokenBody:$('brBody').value,
+    reportSubject:$('rpSubj').value,reportBody:$('rpBody').value};
+  this.disabled=true; say('setMsg','Saving…','info');
+  try{
+    const f=await getFile('pastes/settings.json');
+    await putFile('pastes/settings.json',JSON.stringify(data,null,1),f?f.sha:null,'Settings: update');
+    SET=data; say('setMsg','Saved. The site uses the new messages within a few minutes.');
+  }catch(e){ say('setMsg',nice(e),'bad'); }
+  this.disabled=false;
 };
 
 /* ads */
@@ -337,8 +464,9 @@ $('saveAds').onclick=async function(){
   };
   if(data.popunder.on&&!data.popunder.code) return say('adsMsg','Popunder is on but its code box is empty.','bad');
   if(data.banner.on&&!data.banner.code) return say('adsMsg','Banner is on but its code box is empty.','bad');
+  if(data.native.on&&!data.native.code) return say('adsMsg','Native is on but its code box is empty.','bad');
   if(data.smartlink.on&&!data.smartlink.url) return say('adsMsg','Smartlink is on but its URL is empty.','bad');
-  this.disabled=true; say('adsMsg','Saving…');
+  this.disabled=true; say('adsMsg','Saving…','info');
   try{
     const f=await getFile('pastes/ads.json');
     await putFile('pastes/ads.json',JSON.stringify(data,null,1),f?f.sha:null,'Ads: update');
@@ -347,55 +475,116 @@ $('saveAds').onclick=async function(){
   this.disabled=false;
 };
 
-/* editor */
-let editing=null, images=[];
-function renderThumbs(){
-  const box=$('thumbs'); box.replaceChildren();
-  images.forEach((src,i)=>{
-    const t=el('div','thumb');
-    const im=document.createElement('img'); im.src=src; t.append(im);
-    const bar=el('div','tbar');
-    const mk=(icon,title,fn,dis,cls)=>{const b=el('button','tb'+(cls?' '+cls:''));b.type='button';b.title=title;b.innerHTML=ic(icon,14);b.disabled=!!dis;b.onclick=fn;return b;};
-    bar.append(
-      mk('left','Move left',()=>swap(i,i-1),i===0),
-      mk('right','Move right',()=>swap(i,i+1),i===images.length-1),
-      mk('x','Remove',()=>{images.splice(i,1);renderThumbs();},false,'x')
-    );
-    t.append(bar); box.append(t);
-  });
-  $('imgHint').textContent=images.length+' of 4 images';
-}
-function swap(a,b){ if(b<0||b>=images.length) return; [images[a],images[b]]=[images[b],images[a]]; renderThumbs(); }
-function shrink(file){
+/* image helpers */
+function shrink(file,max,type,q){
   return new Promise((res,rej)=>{
     const url=URL.createObjectURL(file), im=new Image();
     im.onload=()=>{
-      const s=Math.min(1,480/Math.max(im.width,im.height));
+      const s=Math.min(1,max/Math.max(im.width,im.height));
       const c=document.createElement('canvas');
       c.width=Math.max(1,Math.round(im.width*s)); c.height=Math.max(1,Math.round(im.height*s));
       c.getContext('2d').drawImage(im,0,0,c.width,c.height);
-      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg',.6));
+      URL.revokeObjectURL(url); res(c.toDataURL(type,q));
     };
     im.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('Could not read one of the images. Try JPG or PNG.'));};
     im.src=url;
   });
 }
+
+/* editor state */
+let editing=null;           // {id, at, orig:{images:[], logo:''}}
+let pics=[];                // [{path} or {data}]
+let game={};                // {name, placeId, universeId, icon, logo, logoUrl}
+let pendingLogo=null;       // dataURL waiting to upload
+
+function paintGame(){
+  $('gName').value=game.name||'';
+  $('gUrl').value=game.logoUrl||'';
+  const box=$('gPrev'); box.replaceChildren();
+  const src=pendingLogo||(game.logo?game.logo:'')||game.logoUrl||game.icon||'';
+  if(src){
+    const im=document.createElement('img'); im.src=src; im.onerror=()=>{box.replaceChildren(el('span','',((game.name||'?').charAt(0)||'?').toUpperCase()));}; box.append(im);
+  } else box.append(el('span','',((game.name||'?').charAt(0)||'?').toUpperCase()));
+}
+function renderThumbs(){
+  const box=$('thumbs'); box.replaceChildren();
+  pics.forEach((it,i)=>{
+    const t=el('div','thumb');
+    const im=document.createElement('img'); im.src=it.data||it.path; t.append(im);
+    const bar=el('div','tbar');
+    const mk=(icon,title,fn,dis,cls)=>{const b=el('button','tb'+(cls?' '+cls:''));b.type='button';b.title=title;b.innerHTML=ic(icon,14);b.disabled=!!dis;b.onclick=fn;return b;};
+    bar.append(
+      mk('left','Move left',()=>swap(i,i-1),i===0),
+      mk('right','Move right',()=>swap(i,i+1),i===pics.length-1),
+      mk('x','Remove',()=>{pics.splice(i,1);renderThumbs();},false,'x')
+    );
+    t.append(bar); box.append(t);
+  });
+  $('imgHint').textContent=pics.length+' of 4 images';
+}
+function swap(a,b){ if(b<0||b>=pics.length) return; [pics[a],pics[b]]=[pics[b],pics[a]]; renderThumbs(); }
 $('imgs').onchange=async function(e){
   const files=[...e.target.files]; e.target.value='';
   for(const f of files){
-    if(images.length>=4){ say('pubMsg','Maximum 4 cover images.','bad'); break; }
-    try{ images.push(await shrink(f)); }catch(err){ say('pubMsg',err.message,'bad'); }
+    if(pics.length>=4){ say('pubMsg','Maximum 4 cover images.','bad'); break; }
+    try{ pics.push({data:await shrink(f,480,'image/jpeg',.6)}); }catch(err){ say('pubMsg',err.message,'bad'); }
   }
   renderThumbs();
 };
+$('gFile').onchange=async function(e){
+  const f=e.target.files[0]; e.target.value=''; if(!f) return;
+  try{
+    pendingLogo=await shrink(f,192,'image/png');
+    game.logo=game.logo||'';
+    paintGame(); say('gMsg','Logo ready. It uploads when you publish.','info');
+  }catch(err){ say('gMsg',err.message,'bad'); }
+};
+$('gClear').onclick=()=>{ pendingLogo=null; game.logo=''; game.logoUrl=''; $('gUrl').value=''; paintGame(); };
+$('gName').addEventListener('input',()=>{ game.name=$('gName').value; paintGame(); });
+$('gUrl').addEventListener('input',()=>{ game.logoUrl=$('gUrl').value.trim(); paintGame(); });
 $('code').addEventListener('input',function(){ $('chars').textContent=this.value.length+' characters'; });
 
+/* Roblox lookup, best effort from the browser */
+$('fetchGame').onclick=async function(){
+  const raw=$('gLink').value.trim();
+  const m=raw.match(/roblox\.com\/games\/(\d+)/)||raw.match(/^(\d+)$/);
+  if(!m) return say('gMsg','Paste a Roblox game link like roblox.com/games/123456/Name, or just the number.','bad');
+  const placeId=m[1];
+  const slug=raw.match(/roblox\.com\/games\/\d+\/([^/?#]+)/);
+  if(slug&&!$('gName').value.trim()){ game.name=decodeURIComponent(slug[1]).replace(/-/g,' '); }
+  this.disabled=true; say('gMsg','Looking up the game…','info');
+  let ok=false;
+  try{
+    const u=await (await fetch('https://apis.roblox.com/universes/v1/places/'+placeId+'/universe')).json();
+    const universeId=u.universeId;
+    if(!universeId) throw new Error('none');
+    game.placeId=placeId; game.universeId=String(universeId);
+    try{
+      const d=await (await fetch('https://games.roblox.com/v1/games?universeIds='+universeId)).json();
+      if(d.data&&d.data[0]&&d.data[0].name) game.name=d.data[0].name;
+    }catch(e){}
+    try{
+      const t=await (await fetch('https://thumbnails.roblox.com/v1/games/icons?universeIds='+universeId+'&returnPolicy=PlaceHolder&size=256x256&format=Png&isCircular=false')).json();
+      if(t.data&&t.data[0]&&t.data[0].imageUrl) game.icon=t.data[0].imageUrl;
+    }catch(e){}
+    ok=true;
+    say('gMsg',game.icon?'Game found. Icon and name filled in.':'Game found, but no icon. Upload a logo instead.',game.icon?'':'info');
+  }catch(e){
+    say('gMsg','Roblox did not answer from the browser. Type the game name and upload a logo instead.','bad');
+  }
+  paintGame();
+  this.disabled=false;
+};
+
+/* editor actions */
 function resetForm(){
-  editing=null; images=[];
+  editing=null; pics=[]; game={}; pendingLogo=null;
   $('title').value=''; $('code').value=''; $('chars').textContent=''; $('vis').value='1'; $('lang').value='text';
+  $('status').value=''; $('pinned').checked=false; $('changelog').value='';
+  $('gLink').value=''; $('gMsg').className='msg info'; $('gMsg').textContent='Logo order: uploaded logo, then logo URL, then the icon from Roblox, then a letter.';
   $('editTitle').textContent='New script'; $('editSub').textContent='Appears on the home page after publishing';
   $('publish').textContent='Publish'; $('cancelEdit').classList.add('hide');
-  renderThumbs();
+  paintGame(); renderThumbs();
 }
 $('cancelEdit').onclick=()=>{ resetForm(); $('pubMsg').textContent=''; };
 
@@ -411,24 +600,47 @@ function showDone(link,isNew){
 $('publish').onclick=async function(){
   const code=$('code').value;
   if(!code.trim()) return say('pubMsg','The code box is empty.','bad');
+  const btn=this; btn.disabled=true;
   const title=$('title').value.trim()||'Untitled';
-  const lang=$('lang').value, listed=$('vis').value==='1';
   const id=editing?editing.id:rid(), at=editing?editing.at:Date.now();
-  this.disabled=true; say('pubMsg','Saving…');
+  const stamp36=Date.now().toString(36);
   try{
+    say('pubMsg','Uploading images…','info');
+    const images=[];
+    for(let k=0;k<pics.length;k++){
+      const it=pics[k];
+      if(it.path){ images.push(it.path); continue; }
+      const path='pastes/img/'+id+'-'+stamp36+'-'+k+'.jpg';
+      await putBin(path,it.data,'Image '+id);
+      images.push(path);
+    }
+    let logo=game.logo||'';
+    if(pendingLogo){
+      logo='pastes/img/'+id+'-logo-'+stamp36+'.png';
+      await putBin(logo,pendingLogo,'Logo '+id);
+    }
+    const g={name:($('gName').value||'').trim(),placeId:game.placeId||'',universeId:game.universeId||'',
+      icon:game.icon||'',logo,logoUrl:($('gUrl').value||'').trim()};
+    const p={id,title,lang:$('lang').value,at,listed:$('vis').value==='1',pinned:$('pinned').checked,
+      status:$('status').value,changelog:$('changelog').value.trim(),game:g,images,code};
+    say('pubMsg','Saving script…','info');
     const cur=await getFile('pastes/'+id+'.json');
-    await putFile('pastes/'+id+'.json',JSON.stringify({id,title,lang,at,images,code}),cur?cur.sha:null,(editing?'Edit':'Add')+' script '+id);
+    await putFile('pastes/'+id+'.json',JSON.stringify(p),cur?cur.sha:null,(editing?'Edit':'Add')+' script '+id);
+    if(editing){
+      const keep=images.concat(logo?[logo]:[]);
+      for(const f of editing.orig.images.concat(editing.orig.logo?[editing.orig.logo]:[])){
+        if(!keep.includes(f)) await delPath(f).catch(()=>{});
+      }
+    }
     const ix=await readIndex();
-    const list=ix.list.filter(p=>p.id!==id);
-    list.push({id,title,lang,at,listed,images,lines:code.split('\n').length});
-    list.sort((a,b)=>(b.at||0)-(a.at||0));
+    const list=ix.list.filter(x=>x.id!==id); list.push(entryOf(p));
     await writeIndex(list,ix.sha,'List: '+(editing?'edit ':'add ')+id);
     const wasNew=!editing;
     resetForm();
     showDone(cfg.site+'?id='+id,wasNew);
     loadLib();
   }catch(e){ say('pubMsg',nice(e),'bad'); }
-  this.disabled=false;
+  btn.disabled=false;
 };
 
 async function startEdit(p){
@@ -436,11 +648,17 @@ async function startEdit(p){
     const f=await getFile('pastes/'+p.id+'.json');
     if(!f){ say('pubMsg','That script file is missing from the repo.','bad'); return; }
     const d=JSON.parse(f.text);
-    editing={id:p.id,at:d.at||p.at};
+    editing={id:p.id,at:d.at||p.at,orig:{images:(d.images||[]).slice(),logo:(d.game&&d.game.logo)||''}};
     $('title').value=d.title||''; $('lang').value=d.lang||'text';
-    $('vis').value=p.listed===false?'0':'1';
+    $('vis').value=d.listed===false?'0':'1';
+    $('status').value=d.status||''; $('pinned').checked=!!d.pinned;
+    $('changelog').value=d.changelog||'';
     $('code').value=d.code||''; $('chars').textContent=(d.code||'').length+' characters';
-    images=(d.images||[]).slice(0,4); renderThumbs();
+    pics=(d.images||[]).slice(0,4).map(path=>({path}));
+    game=Object.assign({},d.game||{});
+    pendingLogo=null; $('gLink').value=game.placeId?'https://www.roblox.com/games/'+game.placeId:'';
+    $('gUrl').value=game.logoUrl||'';
+    paintGame(); renderThumbs();
     $('editTitle').textContent='Edit script'; $('editSub').textContent='Changes keep the same link and upload time';
     $('publish').textContent='Save changes'; $('cancelEdit').classList.remove('hide');
     say('pubMsg',''); $('pubMsg').className='msg';
@@ -459,7 +677,7 @@ async function loadLib(){
   try{
     const ix=await readIndex();
     renderLib(ix.list);
-  }catch(e){ box.replaceChildren(); const m=el('div','msg bad',nice(e)); box.append(m); }
+  }catch(e){ box.replaceChildren(el('div','msg bad',nice(e))); }
 }
 function renderLib(list){
   const box=$('plist'); box.replaceChildren();
@@ -468,34 +686,39 @@ function renderLib(list){
   list.forEach(p=>{
     const row=el('div','row');
     const th=el('div','th');
-    if(p.images&&p.images[0]){const im=document.createElement('img');im.src=p.images[0];th.append(im);} else th.innerHTML=ic('code',18);
+    if(p.images&&p.images[0]){const im=document.createElement('img');im.src=p.images[0];th.append(im);}
+    else if(p.game&&(p.game.logo||p.game.icon||p.game.logoUrl)){const im=document.createElement('img');im.src=p.game.logo||p.game.logoUrl||p.game.icon;th.append(im);}
+    else th.innerHTML=ic('code2',18);
     const t=el('div','rt');
     const a=el('a','',p.title||'Untitled'); a.href=cfg.site+'?id='+p.id; a.target='_blank';
-    t.append(a, el('small','',[p.lang,ago(p.at),p.listed===false?'hidden':'public'].filter(Boolean).join(' · ')));
+    const bits=[p.game&&p.game.name,STATUS[p.status],ago(stamp(p)),p.listed===false?'hidden':null,p.pinned?'pinned':null].filter(Boolean);
+    t.append(a, el('small','',bits.join(' · ')));
     const acts=el('div','acts');
     acts.append(
+      btn('pin',p.pinned?'Unpin':'Pin to top',()=>patchScript(p.id,{pinned:!p.pinned}),p.pinned?'on':''),
+      btn(p.listed===false?'eyeoff':'eye',p.listed===false?'Show on home':'Hide from home',()=>patchScript(p.id,{listed:p.listed===false})),
       btn('pen','Edit',()=>startEdit(p)),
       btn('link','Copy link',function(){navigator.clipboard&&navigator.clipboard.writeText(cfg.site+'?id='+p.id);this.innerHTML=ic('check',16);setTimeout(()=>{this.innerHTML=ic('link',16);},1400);}),
-      btn(p.listed===false?'eyeoff':'eye',p.listed===false?'Show on home':'Hide from home',()=>toggleVis(p.id)),
       btn('trash','Delete',()=>removeScript(p),'dg')
     );
     row.append(th,t,acts); box.append(row);
   });
 }
-async function toggleVis(id){
+async function patchScript(id,change){
   try{
+    const f=await getFile('pastes/'+id+'.json');
+    if(f){ const d=JSON.parse(f.text); Object.assign(d,change); await putFile('pastes/'+id+'.json',JSON.stringify(d),f.sha,'Update '+id); }
     const ix=await readIndex();
-    const e=ix.list.find(x=>x.id===id); if(!e) return;
-    e.listed=e.listed===false;
-    await writeIndex(ix.list,ix.sha,'List: visibility '+id);
+    const e=ix.list.find(x=>x.id===id);
+    if(e){ Object.assign(e,change); await writeIndex(ix.list,ix.sha,'List: update '+id); }
     loadLib();
   }catch(err){ alert(nice(err)); }
 }
 async function removeScript(p){
   if(!confirm('Delete "'+(p.title||'Untitled')+'"? This cannot be undone.')) return;
   try{
-    const f=await getFile('pastes/'+p.id+'.json');
-    if(f) await gh('contents/pastes/'+p.id+'.json','DELETE',{message:'Delete '+p.id,sha:f.sha});
+    await delPath('pastes/'+p.id+'.json');
+    for(const f of (p.images||[]).concat(p.game&&p.game.logo?[p.game.logo]:[])) await delPath(f).catch(()=>{});
     const ix=await readIndex();
     await writeIndex(ix.list.filter(x=>x.id!==p.id),ix.sha,'List: remove '+p.id);
     if(editing&&editing.id===p.id) resetForm();
@@ -507,19 +730,19 @@ $('rebuild').onclick=async function(){
   try{
     let dir=[];
     try{ dir=await gh('contents/pastes'); }catch(e){ if(e.status!==404) throw e; }
-    const old=await readIndex(); const seen={};
+    const old=await readIndex(), seen={};
     old.list.forEach(p=>{seen[p.id]=p;});
     const list=[];
     for(const f of (Array.isArray(dir)?dir:[])){
       if(f.type!=='file'||!/^[a-z0-9]{6,16}\.json$/.test(f.name)) continue;
       const id=f.name.slice(0,-5);
+      if(EXCLUDE.includes(id)) continue;
       const file=await getFile('pastes/'+f.name);
       if(!file) continue;
       const d=JSON.parse(file.text);
-      list.push({id,title:d.title||'Untitled',lang:d.lang||'text',at:d.at||Date.now(),
-        listed:seen[id]?seen[id].listed!==false:true,images:d.images||[],lines:(d.code||'').split('\n').length});
+      d.id=id;
+      list.push(entryOf(Object.assign(d,{listed:seen[id]?seen[id].listed!==false:d.listed!==false})));
     }
-    list.sort((a,b)=>(b.at||0)-(a.at||0));
     await writeIndex(list,old.sha,'List: rebuild');
     renderLib(list);
   }catch(e){ alert(nice(e)); }
@@ -527,7 +750,7 @@ $('rebuild').onclick=async function(){
 };
 
 /* start */
-renderThumbs();
+renderThumbs(); paintGame();
 if(cfg.token&&cfg.owner&&cfg.repo) $('connect').click();
 })();
 </script>
