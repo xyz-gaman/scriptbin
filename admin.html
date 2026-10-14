@@ -1,282 +1,234 @@
-<!doctype html> 
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scriptbin</title>
+<meta name="robots" content="noindex,nofollow">
+<title>Admin · Scriptbin</title>
 <style>
 :root{--bg:#0b0d12;--s1:#12151c;--s2:#181c26;--line:#252a37;--text:#eceef4;--mute:#8a92a6;--acc:#7c8cff;--acc2:#b07cff;--ok:#3ddc97;--bad:#ff6b6b}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;background:radial-gradient(900px 420px at 50% -120px,#1d2346 0,transparent 70%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
 .wrap{max-width:760px;margin:0 auto;padding:18px 16px 70px}
 .hide{display:none!important}
-.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--text);text-decoration:none}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
 .logo i{font-style:normal;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--acc),var(--acc2));font-size:13px;font-weight:800}
-.pill{font-size:12px;color:var(--mute);border:1px solid var(--line);padding:5px 10px;border-radius:99px}
-.hero{font-size:30px;line-height:1.15;margin:0 0 8px;letter-spacing:-.5px}
-.hero span{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.sub{color:var(--mute);margin:0 0 20px;font-size:15px}
-.search{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--s1);color:var(--text);font-size:16px;margin-bottom:14px;outline:none}
-.search:focus{border-color:var(--acc)}
-.item{display:flex;align-items:center;gap:12px;padding:14px;margin-bottom:10px;background:var(--s1);border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--text);transition:.15s}
-.item:active,.item:hover{border-color:var(--acc);transform:translateY(-1px)}
-.ico{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--s2);color:var(--acc);font-weight:700;font-size:13px}
-.it{flex:1;min-width:0}
-.it b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.it small{color:var(--mute);font-size:12px}
-.chev{color:var(--mute);font-size:20px}
-.empty{text-align:center;color:var(--mute);padding:40px 10px;border:1px dashed var(--line);border-radius:14px}
-.empty b{display:block;color:var(--text);font-size:17px;margin-bottom:6px}
-.back{display:inline-block;color:var(--mute);text-decoration:none;font-size:14px;margin-bottom:12px}
-.vt{font-size:24px;margin:0 0 10px;letter-spacing:-.3px;word-break:break-word}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.chip{font-size:12px;color:var(--mute);background:var(--s1);border:1px solid var(--line);padding:5px 10px;border-radius:99px}
-.card{background:var(--s1);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--s2);border-bottom:1px solid var(--line)}
-.dots{display:flex;gap:6px}.dots b{width:10px;height:10px;border-radius:50%;background:#3a4052}
-.state{font-size:12px;color:var(--mute)}
-.unlocked .state{color:var(--ok)}
-.code{padding:14px;overflow:auto;max-height:52vh;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:filter .4s}
-.locked .code{filter:blur(3.4px);opacity:.9;pointer-events:none}
-.ln{display:flex;gap:14px;white-space:pre}
-.ln span:first-child{color:#4a5266;min-width:26px;text-align:right;flex:none}
-.cap{margin-top:14px;background:var(--s1);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.capbox{display:flex;align-items:center;gap:14px;width:100%;padding:16px;background:none;border:0;color:var(--text);font-size:16px;cursor:pointer;text-align:left}
-.chk{flex:none;width:28px;height:28px;border-radius:8px;border:2px solid #4a5266;display:grid;place-items:center;font-size:16px;color:#fff;transition:.2s}
-.chk.spin{border-color:var(--acc);border-top-color:transparent;border-radius:50%;animation:sp .7s linear infinite}
-.chk.ok{background:var(--ok);border-color:var(--ok);color:#06241a}
-@keyframes sp{to{transform:rotate(360deg)}}
-.brand{margin-left:auto;font-size:11px;color:var(--mute);text-align:right;line-height:1.3}
-.chal{border-top:1px solid var(--line);padding:14px}
-.chead{background:linear-gradient(135deg,var(--acc),var(--acc2));border-radius:10px;padding:12px 14px;font-size:15px;margin-bottom:10px}
-.chead b{font-size:19px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.tile{position:relative;padding:0;border:3px solid transparent;border-radius:10px;overflow:hidden;background:none;aspect-ratio:1;cursor:pointer}
-.tile canvas{width:100%;height:100%;display:block}
-.tile.on{border-color:var(--acc)}
-.tk{position:absolute;top:6px;left:6px;width:22px;height:22px;border-radius:50%;background:var(--acc);color:#fff;font-size:13px;display:none;place-items:center}
-.tile.on .tk{display:grid}
-.cfoot{display:flex;gap:10px;margin-top:12px}
-.err{color:var(--bad);font-size:13px;min-height:18px;margin-top:8px}
-button{font-family:inherit}
-.btn{flex:1;padding:13px;border-radius:10px;border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-size:15px;font-weight:600;cursor:pointer}
-.btn.ghost{background:var(--s2);border:1px solid var(--line);color:var(--text);font-weight:500}
-.copy{width:100%;margin-top:14px;padding:16px;border-radius:12px;border:0;font-size:16px;font-weight:700;background:var(--ok);color:#06241a;cursor:pointer}
-.copy:disabled{background:var(--s2);color:var(--mute);border:1px solid var(--line);cursor:not-allowed}
-.shake{animation:sh .35s}
-@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.tag{font-size:11px;color:var(--acc);border:1px solid var(--acc);padding:3px 8px;border-radius:99px;margin-left:4px}
+.top a{color:var(--mute);font-size:14px;text-decoration:none}
+.card{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px}
+.card h2{font-size:15px;margin:0 0 14px;color:var(--text)}
+label{display:block;font-size:12px;color:var(--mute);margin:12px 0 6px}
+input[type=text],input[type=password],select,textarea{width:100%;padding:13px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--text);font-size:16px;outline:none;font-family:inherit}
+input:focus,select:focus,textarea:focus{border-color:var(--acc)}
+textarea{min-height:260px;resize:vertical;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{width:100%;margin-top:16px;padding:14px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-size:16px;font-weight:600;cursor:pointer}
+.btn:disabled{opacity:.5}
+.sm{padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--s2);color:var(--text);font-size:13px;cursor:pointer}
+.sm.del{color:var(--bad)}
+.row{display:flex;align-items:center;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--ok);flex:none}
+.grow{flex:1;min-width:0}
+.mute{color:var(--mute);font-size:13px}
+.sw{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:14px;color:var(--text)}
+.sw input{width:20px;height:20px}
+.msg{margin-top:12px;font-size:14px;word-break:break-all}
+.msg.ok{color:var(--ok)}.msg.bad{color:var(--bad)}
+.msg a{color:var(--ok)}
+.pi{display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--line)}
+.pi:first-of-type{border-top:0}
+.pi b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pi small{color:var(--mute);font-size:12px}
+.pi .acts{display:flex;gap:6px;flex:none}
+.cnt{float:right;font-size:12px;color:var(--mute);margin-top:-22px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header class="top">
-    <a class="logo" href="./"><i>&lt;/&gt;</i>ScriptVault</a>
-    <span class="pill">Free scripts</span>
-  </header>
+  <div class="top">
+    <div class="logo"><i>&lt;/&gt;</i>ScriptVault <span class="tag">ADMIN</span></div>
+    <a id="siteLink" href="./">View site ↗</a>
+  </div>
 
-  <!-- HOME -->
-  <section id="home">
-    <h1 class="hero">Scripts, <span>ready to copy.</span></h1>
-    <p class="sub">Open a script, prove you're human, copy it.</p>
-    <input id="q" class="search" type="search" placeholder="Search scripts…">
-    <div id="list"></div>
-  </section>
-
-  <!-- SCRIPT PAGE -->
-  <section id="view" class="hide">
-    <a class="back" href="./">← All scripts</a>
-    <h1 class="vt" id="title">Loading…</h1>
-    <div class="chips"><span class="chip" id="lang"></span><span class="chip" id="date"></span><span class="chip" id="count"></span></div>
-
-    <div id="body">
-      <div class="card locked" id="codecard">
-        <div class="bar"><span class="dots"><b></b><b></b><b></b></span><span class="state" id="state">🔒 Locked</span></div>
-        <div class="code" id="lines"></div>
-      </div>
-
-      <div class="cap" id="cap">
-        <button class="capbox" id="capbtn" type="button">
-          <span class="chk" id="chk"></span>
-          <span id="caplabel">I'm not a robot</span>
-          <span class="brand">🛡 Human<br>check</span>
-        </button>
-        <div class="chal hide" id="chal">
-          <div class="chead">Select all images with <b id="target"></b></div>
-          <div class="grid" id="grid"></div>
-          <div class="err" id="err"></div>
-          <div class="cfoot">
-            <button class="btn ghost" id="refresh" type="button">↻ New images</button>
-            <button class="btn" id="verify" type="button">Verify</button>
-          </div>
-        </div>
-      </div>
-
-      <button class="copy" id="copy" type="button" disabled>🔒 Verify to copy</button>
+  <!-- CONNECTION -->
+  <div class="card" id="connCard">
+    <div id="connOk" class="row hide">
+      <span class="dot"></span>
+      <div class="grow"><b id="connName" style="font-size:14px"></b><div class="mute">Connected — only you can publish</div></div>
+      <button class="sm" id="changeBtn">Change</button>
     </div>
-
-    <div class="empty hide" id="missing">
-      <b>Script not found</b>
-      If you just published it, wait about a minute and refresh.<br><br>
-      <a href="./" style="color:var(--acc)">Back to all scripts</a>
+    <div id="connForm">
+      <h2>🔑 Connect your GitHub</h2>
+      <label>Personal access token</label>
+      <input type="password" id="token" placeholder="github_pat_..." autocomplete="off">
+      <div class="two">
+        <div><label>GitHub username</label><input type="text" id="owner" autocapitalize="off"></div>
+        <div><label>Repository</label><input type="text" id="repo" autocapitalize="off"></div>
+      </div>
+      <label>Site URL</label>
+      <input type="text" id="site" autocapitalize="off">
+      <button class="btn" id="connect">Connect</button>
+      <div class="msg" id="connMsg"></div>
     </div>
-  </section>
+  </div>
+
+  <!-- PUBLISH -->
+  <div class="card hide" id="pubCard">
+    <h2>✍️ New script</h2>
+    <label>Title</label>
+    <input type="text" id="title" placeholder="e.g. Auto farm script">
+    <label>Language</label>
+    <select id="lang">
+      <option>text</option><option>lua</option><option>javascript</option><option>python</option>
+      <option>bash</option><option>html</option><option>css</option><option>java</option><option>c++</option><option>json</option>
+    </select>
+    <label>Code <span id="chars" class="mute" style="float:right"></span></label>
+    <textarea id="code" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="Paste your script here…"></textarea>
+    <label class="sw"><input type="checkbox" id="listed" checked> Show on the public home page</label>
+    <button class="btn" id="pub">Publish</button>
+    <div class="msg" id="pubMsg"></div>
+  </div>
+
+  <!-- LIST -->
+  <div class="card hide" id="listCard">
+    <h2>📚 Your scripts</h2>
+    <div id="plist" class="mute">Loading…</div>
+  </div>
 </div>
 
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  var id = new URLSearchParams(location.search).get("id");
-  var codeText = "";
+  var cfg = { owner: "", repo: "", token: "", site: "" };
+  try { Object.assign(cfg, JSON.parse(localStorage.getItem("sv_cfg") || "{}")); } catch (e) {}
 
-  /* ---------- HOME ---------- */
-  function initHome() {
-    $("home").classList.remove("hide");
-    var items = [];
-    function draw() {
-      var term = $("q").value.trim().toLowerCase();
-      var list = $("list"); list.innerHTML = "";
-      var shown = items.filter(function (p) { return (p.title || "").toLowerCase().indexOf(term) > -1; });
-      if (!shown.length) {
-        list.innerHTML = '<div class="empty"><b>' + (items.length ? "No match" : "No scripts yet") + '</b>' + (items.length ? "Try a different search." : "Check back soon.") + '</div>';
-        return;
-      }
-      shown.forEach(function (p) {
-        var a = document.createElement("a");
-        a.className = "item"; a.href = "?id=" + p.id;
-        var ico = document.createElement("div"); ico.className = "ico"; ico.textContent = (p.lang || "txt").slice(0, 3).toUpperCase();
-        var it = document.createElement("div"); it.className = "it";
-        var b = document.createElement("b"); b.textContent = p.title || "Untitled";
-        var s = document.createElement("small"); s.textContent = (p.lang || "text") + " · " + (p.date || "");
-        it.append(b, s);
-        var ch = document.createElement("span"); ch.className = "chev"; ch.textContent = "›";
-        a.append(ico, it, ch); list.append(a);
+  // auto-fill from the page address
+  if (!cfg.owner && /github\.io$/.test(location.hostname)) cfg.owner = location.hostname.split(".")[0];
+  if (!cfg.repo) cfg.repo = location.pathname.split("/")[1] || "";
+  if (!cfg.site) cfg.site = location.origin + location.pathname.replace(/admin\.html.*$/, "");
+  ["token", "owner", "repo", "site"].forEach(function (k) { $(k).value = cfg[k] || ""; });
+  $("siteLink").href = cfg.site || "./";
+
+  function say(el, text, type) { el.className = "msg " + (type || ""); el.textContent = text; }
+  var enc = function (s) { return btoa(unescape(encodeURIComponent(s))); };
+  var dec = function (b) { return decodeURIComponent(escape(atob(b.replace(/\n/g, "")))); };
+
+  async function gh(path, method, body) {
+    var r = await fetch("https://api.github.com/repos/" + cfg.owner + "/" + cfg.repo + "/" + path, {
+      method: method || "GET", cache: "no-store",
+      headers: { Authorization: "Bearer " + cfg.token, Accept: "application/vnd.github+json" },
+      body: body ? JSON.stringify(body) : undefined
+    });
+    var j = await r.json().catch(function () { return {}; });
+    if (!r.ok) { var e = new Error(j.message || r.status); e.status = r.status; throw e; }
+    return j;
+  }
+  async function readIndex() {
+    try { var j = await gh("contents/pastes/index.json"); return { sha: j.sha, list: JSON.parse(dec(j.content)) }; }
+    catch (e) { if (e.status === 404) return { sha: null, list: [] }; throw e; }
+  }
+  function writeIndex(list, sha, msg) {
+    var b = { message: msg, content: enc(JSON.stringify(list, null, 1)) };
+    if (sha) b.sha = sha;
+    return gh("contents/pastes/index.json", "PUT", b);
+  }
+
+  /* ---- connect ---- */
+  function showConnected() {
+    $("connForm").classList.add("hide");
+    $("connOk").classList.remove("hide");
+    $("connName").textContent = cfg.owner + " / " + cfg.repo;
+    $("pubCard").classList.remove("hide");
+    $("listCard").classList.remove("hide");
+    $("siteLink").href = cfg.site;
+    loadList();
+  }
+  $("connect").onclick = async function () {
+    cfg.token = $("token").value.trim(); cfg.owner = $("owner").value.trim();
+    cfg.repo = $("repo").value.trim(); cfg.site = $("site").value.trim();
+    if (cfg.site && cfg.site.slice(-1) !== "/") cfg.site += "/";
+    if (!cfg.token || !cfg.owner || !cfg.repo || !cfg.site) return say($("connMsg"), "Fill every box.", "bad");
+    say($("connMsg"), "Checking…");
+    try {
+      var j = await gh("");
+      if (!j.permissions || !j.permissions.push) throw new Error("Token has no write access. Set Contents → Read and write.");
+      try { localStorage.setItem("sv_cfg", JSON.stringify(cfg)); } catch (e) {}
+      say($("connMsg"), ""); showConnected();
+    } catch (e) {
+      say($("connMsg"), e.status === 404 ? "Repo not found, or token has no access to it. Check username and repo name." : e.status === 401 ? "Token is wrong or expired. Make a new one." : e.message, "bad");
+    }
+  };
+  $("changeBtn").onclick = function () {
+    $("connForm").classList.remove("hide"); $("connOk").classList.add("hide");
+    $("pubCard").classList.add("hide"); $("listCard").classList.add("hide");
+  };
+
+  /* ---- publish ---- */
+  $("code").addEventListener("input", function () { $("chars").textContent = this.value.length + " chars"; });
+  function rid() {
+    var c = "abcdefghijklmnopqrstuvwxyz0123456789", s = "", a = new Uint8Array(8);
+    crypto.getRandomValues(a); for (var i = 0; i < 8; i++) s += c[a[i] % c.length]; return s;
+  }
+  $("pub").onclick = async function () {
+    var btn = this, code = $("code").value;
+    if (!code.trim()) return say($("pubMsg"), "Code is empty.", "bad");
+    var id = rid();
+    var meta = { id: id, title: $("title").value.trim() || "Untitled", lang: $("lang").value, date: new Date().toISOString().slice(0, 10), listed: $("listed").checked };
+    btn.disabled = true; say($("pubMsg"), "Publishing…");
+    try {
+      await gh("contents/pastes/" + id + ".json", "PUT", { message: "Add paste " + id, content: enc(JSON.stringify({ title: meta.title, lang: meta.lang, date: meta.date, code: code })) });
+      var ix = await readIndex();
+      ix.list.unshift(meta);
+      await writeIndex(ix.list, ix.sha, "Index: add " + id);
+      var link = cfg.site + "?id=" + id;
+      $("pubMsg").className = "msg ok"; $("pubMsg").innerHTML = "";
+      $("pubMsg").append("✅ Published. Goes live in about a minute:\n");
+      var a = document.createElement("a"); a.href = link; a.textContent = link; $("pubMsg").append(document.createElement("br"), a);
+      var cp = document.createElement("button"); cp.className = "sm"; cp.style.marginTop = "10px"; cp.style.display = "block"; cp.textContent = "Copy link";
+      cp.onclick = function () { navigator.clipboard.writeText(link); cp.textContent = "Copied ✓"; };
+      $("pubMsg").append(cp);
+      $("code").value = ""; $("title").value = ""; $("chars").textContent = "";
+      loadList();
+    } catch (e) { say($("pubMsg"), "Failed: " + e.message, "bad"); }
+    btn.disabled = false;
+  };
+
+  /* ---- list / delete ---- */
+  async function loadList() {
+    var box = $("plist"); box.className = "mute"; box.textContent = "Loading…";
+    try {
+      var ix = await readIndex(); box.innerHTML = "";
+      if (!ix.list.length) { box.textContent = "Nothing published yet."; return; }
+      ix.list.forEach(function (p) {
+        var row = document.createElement("div"); row.className = "pi";
+        var g = document.createElement("div"); g.className = "grow";
+        var b = document.createElement("b"); b.textContent = p.title;
+        var s = document.createElement("small"); s.textContent = p.lang + " · " + p.date + (p.listed === false ? " · unlisted" : "");
+        g.append(b, s);
+        var acts = document.createElement("div"); acts.className = "acts";
+        var c = document.createElement("button"); c.className = "sm"; c.textContent = "Link";
+        c.onclick = function () { navigator.clipboard.writeText(cfg.site + "?id=" + p.id); c.textContent = "Copied"; setTimeout(function () { c.textContent = "Link"; }, 1500); };
+        var d = document.createElement("button"); d.className = "sm del"; d.textContent = "Delete";
+        d.onclick = function () { removePaste(p, d); };
+        acts.append(c, d); row.append(g, acts); box.append(row);
       });
-    }
-    $("q").addEventListener("input", draw);
-    fetch("pastes/index.json?t=" + Date.now())
-      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
-      .then(function (l) { items = l.filter(function (p) { return p.listed !== false; }); draw(); })
-      .catch(function () { items = []; draw(); });
+    } catch (e) { box.textContent = "Could not load list: " + e.message; }
+  }
+  async function removePaste(p, btn) {
+    if (!confirm("Delete \"" + p.title + "\"?")) return;
+    btn.disabled = true; btn.textContent = "…";
+    try {
+      try { var f = await gh("contents/pastes/" + p.id + ".json"); await gh("contents/pastes/" + p.id + ".json", "DELETE", { message: "Delete paste " + p.id, sha: f.sha }); }
+      catch (e) { if (e.status !== 404) throw e; }
+      var ix = await readIndex();
+      await writeIndex(ix.list.filter(function (x) { return x.id !== p.id; }), ix.sha, "Index: remove " + p.id);
+      loadList();
+    } catch (e) { alert("Delete failed: " + e.message); btn.disabled = false; btn.textContent = "Delete"; }
   }
 
-  /* ---------- SCRIPT PAGE ---------- */
-  function initView() {
-    $("view").classList.remove("hide");
-    if (!/^[a-z0-9]{6,16}$/.test(id)) return notFound();
-    fetch("pastes/" + id + ".json?t=" + Date.now())
-      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
-      .then(function (p) {
-        codeText = p.code || "";
-        document.title = (p.title || "Script") + " · ScriptVault";
-        $("title").textContent = p.title || "Untitled";
-        $("lang").textContent = p.lang || "text";
-        $("date").textContent = p.date || "";
-        var lines = codeText.split("\n");
-        $("count").textContent = lines.length + (lines.length === 1 ? " line" : " lines");
-        var box = $("lines");
-        lines.forEach(function (l, i) {
-          var r = document.createElement("div"); r.className = "ln";
-          var n = document.createElement("span"); n.textContent = i + 1;
-          var c = document.createElement("span"); c.textContent = l || " ";
-          r.append(n, c); box.append(r);
-        });
-      })
-      .catch(notFound);
-  }
-  function notFound() {
-    $("title").textContent = "";
-    $("body").classList.add("hide");
-    $("missing").classList.remove("hide");
-  }
-
-  /* ---------- IMAGE CAPTCHA ---------- */
-  var CATS = [["cats", "🐱"], ["cars", "🚗"], ["trees", "🌳"], ["apples", "🍎"], ["stars", "⭐"], ["fish", "🐟"], ["bikes", "🚲"], ["flowers", "🌸"]];
-  var answer = new Set(), picked = new Set();
-  var R = function (n) { return Math.random() * n; };
-
-  function tile(emoji) {
-    var c = document.createElement("canvas"); c.width = c.height = 110;
-    var x = c.getContext("2d");
-    x.fillStyle = "hsl(" + R(360) + ",35%," + (16 + R(12)) + "%)"; x.fillRect(0, 0, 110, 110);
-    for (var i = 0; i < 12; i++) {
-      x.strokeStyle = "hsla(" + R(360) + ",60%,60%,.28)"; x.lineWidth = 1 + R(2);
-      x.beginPath(); x.moveTo(R(110), R(110)); x.lineTo(R(110), R(110)); x.stroke();
-    }
-    x.save();
-    x.translate(55 + R(12) - 6, 58 + R(12) - 6); x.rotate((Math.random() - .5) * .7);
-    x.font = (48 + R(16)) + 'px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
-    x.textAlign = "center"; x.textBaseline = "middle"; x.fillText(emoji, 0, 0);
-    x.restore();
-    x.fillStyle = "rgba(255,255,255,.14)";
-    for (var j = 0; j < 45; j++) x.fillRect(R(110), R(110), 2, 2);
-    return c;
-  }
-
-  function newChallenge() {
-    var t = CATS[Math.floor(R(CATS.length))];
-    var others = CATS.filter(function (c) { return c !== t; });
-    var count = 2 + Math.floor(R(3));
-    var pos = [0, 1, 2, 3, 4, 5, 6, 7, 8].sort(function () { return Math.random() - .5; }).slice(0, count);
-    answer = new Set(pos); picked = new Set();
-    $("target").textContent = t[0]; $("err").textContent = "";
-    var g = $("grid"); g.innerHTML = "";
-    for (var i = 0; i < 9; i++) (function (i) {
-      var e = answer.has(i) ? t[1] : others[Math.floor(R(others.length))][1];
-      var d = document.createElement("button"); d.type = "button"; d.className = "tile";
-      d.appendChild(tile(e));
-      var k = document.createElement("span"); k.className = "tk"; k.textContent = "✓"; d.appendChild(k);
-      d.onclick = function () {
-        if (picked.has(i)) { picked.delete(i); d.classList.remove("on"); }
-        else { picked.add(i); d.classList.add("on"); }
-      };
-      g.appendChild(d);
-    })(i);
-  }
-
-  $("capbtn").addEventListener("click", function () {
-    if (!$("chal").classList.contains("hide") || $("chk").classList.contains("ok")) return;
-    $("chk").classList.add("spin");
-    setTimeout(function () {
-      $("chk").classList.remove("spin");
-      $("chal").classList.remove("hide");
-      newChallenge();
-    }, 600);
-  });
-  $("refresh").addEventListener("click", newChallenge);
-
-  $("verify").addEventListener("click", function () {
-    var ok = picked.size === answer.size && Array.from(picked).every(function (i) { return answer.has(i); });
-    if (ok) {
-      $("chal").classList.add("hide");
-      $("chk").classList.add("ok"); $("chk").textContent = "✓";
-      $("caplabel").textContent = "Verified — you're human";
-      $("codecard").classList.remove("locked"); $("codecard").classList.add("unlocked");
-      $("state").textContent = "🔓 Unlocked";
-      $("copy").disabled = false; $("copy").textContent = "Copy code";
-    } else {
-      $("err").textContent = "Not quite — try again with new images.";
-      $("grid").classList.add("shake");
-      setTimeout(function () { $("grid").classList.remove("shake"); newChallenge(); $("err").textContent = "Not quite — try again with new images."; }, 350);
-    }
-  });
-
-  /* ---------- COPY + PROTECTION ---------- */
-  function fallbackCopy(t) {
-    var a = document.createElement("textarea"); a.value = t; a.style.position = "fixed"; a.style.opacity = "0";
-    document.body.appendChild(a); a.select(); try { document.execCommand("copy"); } catch (e) {} a.remove();
-  }
-  $("copy").addEventListener("click", function () {
-    var b = this;
-    var done = function () { b.textContent = "Copied ✓"; setTimeout(function () { b.textContent = "Copy code"; }, 1800); };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(codeText).then(done, function () { fallbackCopy(codeText); done(); });
-    else { fallbackCopy(codeText); done(); }
-  });
-  ["copy", "cut", "contextmenu", "dragstart", "selectstart"].forEach(function (ev) {
-    $("codecard").addEventListener(ev, function (e) { e.preventDefault(); });
-  });
-
-  if (id) initView(); else initHome();
+  // auto-connect if a token is already saved
+  if (cfg.token) $("connect").click();
 })();
 </script>
 </body>
