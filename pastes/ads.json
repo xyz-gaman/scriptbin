@@ -1,8 +1,8 @@
 {
  "enabled": true,
  "popunder": {
-  "on": false,
-  "code": ""
+  "on": true,
+  "code": "<script data-cfasync=\"false\" src=\"https://afders.org/1/2042cc6ac5532e95eb82b191ff08b5ca\"></script>"
  },
  "banner": {
   "on": true,
@@ -10,7 +10,7 @@
  },
  "native": {
   "on": true,
-  "code": "<script>\n  atOptions = {\n    'key' : '3933aa78837bd0f323a07db6b15b6708',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bicea.org/22/3933aa78837bd0f323a07db6b15b6708\"></script>"
+  "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bicea.org/21/1925a21a99d56474237058162623f7f0\"></script>\n<div id=\"container-1925a21a99d56474237058162623f7f0\"></div>"
  },
  "smartlink": {
   "on": false,
