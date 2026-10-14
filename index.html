@@ -1,126 +1,282 @@
-<!doctype html>
+<!doctype html> 
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Script Vault</title>
+<title>Scriptbin</title>
 <style>
-  :root { --bg:#0f1115; --card:#181b22; --line:#2a2f3a; --text:#e6e8ee; --mute:#8b93a7; --acc:#6c8cff; }
-  * { box-sizing: border-box; }
-  body { margin:0; background:var(--bg); color:var(--text); font-family:system-ui,sans-serif; padding:16px; }
-  .wrap { max-width:820px; margin:0 auto; }
-  h1 { font-size:20px; margin:8px 0 4px; }
-  .meta { color:var(--mute); font-size:13px; margin-bottom:14px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px; }
-  .codebox { position:relative; }
-  pre { margin:0; padding:14px; background:#0b0d11; border:1px solid var(--line); border-radius:10px;
-        overflow:auto; max-height:60vh; font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;
-        user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; transition:filter .3s; }
-  pre.blur { filter:blur(7px); pointer-events:none; }
-  .gate { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:12px; }
-  .gate .box { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; width:100%; max-width:320px; text-align:center; }
-  button { background:var(--acc); color:#fff; border:0; border-radius:8px; padding:10px 16px; font-size:15px; cursor:pointer; }
-  button.ghost { background:transparent; border:1px solid var(--line); color:var(--text); }
-  input { width:100%; padding:10px; border-radius:8px; border:1px solid var(--line); background:#0b0d11; color:var(--text); font-size:16px; margin:8px 0; text-align:center; }
-  .row { display:flex; gap:8px; margin-top:12px; align-items:center; justify-content:space-between; }
-  .err { color:#ff7a7a; font-size:13px; min-height:18px; }
-  .check { display:flex; align-items:center; gap:10px; justify-content:center; font-size:15px; cursor:pointer; padding:6px; }
-  .check input { width:22px; height:22px; margin:0; }
-  .hide { display:none; }
+:root{--bg:#0b0d12;--s1:#12151c;--s2:#181c26;--line:#252a37;--text:#eceef4;--mute:#8a92a6;--acc:#7c8cff;--acc2:#b07cff;--ok:#3ddc97;--bad:#ff6b6b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:radial-gradient(900px 420px at 50% -120px,#1d2346 0,transparent 70%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+.wrap{max-width:760px;margin:0 auto;padding:18px 16px 70px}
+.hide{display:none!important}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--text);text-decoration:none}
+.logo i{font-style:normal;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--acc),var(--acc2));font-size:13px;font-weight:800}
+.pill{font-size:12px;color:var(--mute);border:1px solid var(--line);padding:5px 10px;border-radius:99px}
+.hero{font-size:30px;line-height:1.15;margin:0 0 8px;letter-spacing:-.5px}
+.hero span{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mute);margin:0 0 20px;font-size:15px}
+.search{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--s1);color:var(--text);font-size:16px;margin-bottom:14px;outline:none}
+.search:focus{border-color:var(--acc)}
+.item{display:flex;align-items:center;gap:12px;padding:14px;margin-bottom:10px;background:var(--s1);border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--text);transition:.15s}
+.item:active,.item:hover{border-color:var(--acc);transform:translateY(-1px)}
+.ico{flex:none;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--s2);color:var(--acc);font-weight:700;font-size:13px}
+.it{flex:1;min-width:0}
+.it b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.it small{color:var(--mute);font-size:12px}
+.chev{color:var(--mute);font-size:20px}
+.empty{text-align:center;color:var(--mute);padding:40px 10px;border:1px dashed var(--line);border-radius:14px}
+.empty b{display:block;color:var(--text);font-size:17px;margin-bottom:6px}
+.back{display:inline-block;color:var(--mute);text-decoration:none;font-size:14px;margin-bottom:12px}
+.vt{font-size:24px;margin:0 0 10px;letter-spacing:-.3px;word-break:break-word}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{font-size:12px;color:var(--mute);background:var(--s1);border:1px solid var(--line);padding:5px 10px;border-radius:99px}
+.card{background:var(--s1);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--s2);border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:6px}.dots b{width:10px;height:10px;border-radius:50%;background:#3a4052}
+.state{font-size:12px;color:var(--mute)}
+.unlocked .state{color:var(--ok)}
+.code{padding:14px;overflow:auto;max-height:52vh;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:filter .4s}
+.locked .code{filter:blur(3.4px);opacity:.9;pointer-events:none}
+.ln{display:flex;gap:14px;white-space:pre}
+.ln span:first-child{color:#4a5266;min-width:26px;text-align:right;flex:none}
+.cap{margin-top:14px;background:var(--s1);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.capbox{display:flex;align-items:center;gap:14px;width:100%;padding:16px;background:none;border:0;color:var(--text);font-size:16px;cursor:pointer;text-align:left}
+.chk{flex:none;width:28px;height:28px;border-radius:8px;border:2px solid #4a5266;display:grid;place-items:center;font-size:16px;color:#fff;transition:.2s}
+.chk.spin{border-color:var(--acc);border-top-color:transparent;border-radius:50%;animation:sp .7s linear infinite}
+.chk.ok{background:var(--ok);border-color:var(--ok);color:#06241a}
+@keyframes sp{to{transform:rotate(360deg)}}
+.brand{margin-left:auto;font-size:11px;color:var(--mute);text-align:right;line-height:1.3}
+.chal{border-top:1px solid var(--line);padding:14px}
+.chead{background:linear-gradient(135deg,var(--acc),var(--acc2));border-radius:10px;padding:12px 14px;font-size:15px;margin-bottom:10px}
+.chead b{font-size:19px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tile{position:relative;padding:0;border:3px solid transparent;border-radius:10px;overflow:hidden;background:none;aspect-ratio:1;cursor:pointer}
+.tile canvas{width:100%;height:100%;display:block}
+.tile.on{border-color:var(--acc)}
+.tk{position:absolute;top:6px;left:6px;width:22px;height:22px;border-radius:50%;background:var(--acc);color:#fff;font-size:13px;display:none;place-items:center}
+.tile.on .tk{display:grid}
+.cfoot{display:flex;gap:10px;margin-top:12px}
+.err{color:var(--bad);font-size:13px;min-height:18px;margin-top:8px}
+button{font-family:inherit}
+.btn{flex:1;padding:13px;border-radius:10px;border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-size:15px;font-weight:600;cursor:pointer}
+.btn.ghost{background:var(--s2);border:1px solid var(--line);color:var(--text);font-weight:500}
+.copy{width:100%;margin-top:14px;padding:16px;border-radius:12px;border:0;font-size:16px;font-weight:700;background:var(--ok);color:#06241a;cursor:pointer}
+.copy:disabled{background:var(--s2);color:var(--mute);border:1px solid var(--line);cursor:not-allowed}
+.shake{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1 id="title">Loading…</h1>
-  <div class="meta" id="meta"></div>
-  <div class="card">
-    <div class="codebox">
-      <pre id="code" class="blur" oncontextmenu="return false"></pre>
-      <div class="gate" id="gate">
-        <div class="box">
-          <div id="step1">
-            <label class="check"><input type="checkbox" id="human"> I am human</label>
-          </div>
-          <div id="step2" class="hide">
-            <div id="q" style="font-size:18px"></div>
-            <input id="ans" inputmode="numeric" placeholder="Answer">
-            <button id="verify">Verify</button>
-            <div class="err" id="err"></div>
+  <header class="top">
+    <a class="logo" href="./"><i>&lt;/&gt;</i>ScriptVault</a>
+    <span class="pill">Free scripts</span>
+  </header>
+
+  <!-- HOME -->
+  <section id="home">
+    <h1 class="hero">Scripts, <span>ready to copy.</span></h1>
+    <p class="sub">Open a script, prove you're human, copy it.</p>
+    <input id="q" class="search" type="search" placeholder="Search scripts…">
+    <div id="list"></div>
+  </section>
+
+  <!-- SCRIPT PAGE -->
+  <section id="view" class="hide">
+    <a class="back" href="./">← All scripts</a>
+    <h1 class="vt" id="title">Loading…</h1>
+    <div class="chips"><span class="chip" id="lang"></span><span class="chip" id="date"></span><span class="chip" id="count"></span></div>
+
+    <div id="body">
+      <div class="card locked" id="codecard">
+        <div class="bar"><span class="dots"><b></b><b></b><b></b></span><span class="state" id="state">🔒 Locked</span></div>
+        <div class="code" id="lines"></div>
+      </div>
+
+      <div class="cap" id="cap">
+        <button class="capbox" id="capbtn" type="button">
+          <span class="chk" id="chk"></span>
+          <span id="caplabel">I'm not a robot</span>
+          <span class="brand">🛡 Human<br>check</span>
+        </button>
+        <div class="chal hide" id="chal">
+          <div class="chead">Select all images with <b id="target"></b></div>
+          <div class="grid" id="grid"></div>
+          <div class="err" id="err"></div>
+          <div class="cfoot">
+            <button class="btn ghost" id="refresh" type="button">↻ New images</button>
+            <button class="btn" id="verify" type="button">Verify</button>
           </div>
         </div>
       </div>
+
+      <button class="copy" id="copy" type="button" disabled>🔒 Verify to copy</button>
     </div>
-    <div class="row hide" id="actions">
-      <span class="meta" id="lines"></span>
-      <button id="copy">Copy code</button>
+
+    <div class="empty hide" id="missing">
+      <b>Script not found</b>
+      If you just published it, wait about a minute and refresh.<br><br>
+      <a href="./" style="color:var(--acc)">Back to all scripts</a>
     </div>
-  </div>
+  </section>
 </div>
 
 <script>
 (function () {
-  var codeText = "";
   var $ = function (id) { return document.getElementById(id); };
   var id = new URLSearchParams(location.search).get("id");
+  var codeText = "";
 
-  if (!id || !/^[a-z0-9]{6,16}$/.test(id)) {
-    $("title").textContent = "Paste not found";
-    $("gate").classList.add("hide");
-  } else {
+  /* ---------- HOME ---------- */
+  function initHome() {
+    $("home").classList.remove("hide");
+    var items = [];
+    function draw() {
+      var term = $("q").value.trim().toLowerCase();
+      var list = $("list"); list.innerHTML = "";
+      var shown = items.filter(function (p) { return (p.title || "").toLowerCase().indexOf(term) > -1; });
+      if (!shown.length) {
+        list.innerHTML = '<div class="empty"><b>' + (items.length ? "No match" : "No scripts yet") + '</b>' + (items.length ? "Try a different search." : "Check back soon.") + '</div>';
+        return;
+      }
+      shown.forEach(function (p) {
+        var a = document.createElement("a");
+        a.className = "item"; a.href = "?id=" + p.id;
+        var ico = document.createElement("div"); ico.className = "ico"; ico.textContent = (p.lang || "txt").slice(0, 3).toUpperCase();
+        var it = document.createElement("div"); it.className = "it";
+        var b = document.createElement("b"); b.textContent = p.title || "Untitled";
+        var s = document.createElement("small"); s.textContent = (p.lang || "text") + " · " + (p.date || "");
+        it.append(b, s);
+        var ch = document.createElement("span"); ch.className = "chev"; ch.textContent = "›";
+        a.append(ico, it, ch); list.append(a);
+      });
+    }
+    $("q").addEventListener("input", draw);
+    fetch("pastes/index.json?t=" + Date.now())
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (l) { items = l.filter(function (p) { return p.listed !== false; }); draw(); })
+      .catch(function () { items = []; draw(); });
+  }
+
+  /* ---------- SCRIPT PAGE ---------- */
+  function initView() {
+    $("view").classList.remove("hide");
+    if (!/^[a-z0-9]{6,16}$/.test(id)) return notFound();
     fetch("pastes/" + id + ".json?t=" + Date.now())
       .then(function (r) { if (!r.ok) throw 0; return r.json(); })
       .then(function (p) {
         codeText = p.code || "";
+        document.title = (p.title || "Script") + " · ScriptVault";
         $("title").textContent = p.title || "Untitled";
-        $("meta").textContent = (p.lang || "text") + " · " + (p.date || "");
-        $("code").textContent = codeText;
-        $("lines").textContent = codeText.split("\n").length + " lines";
+        $("lang").textContent = p.lang || "text";
+        $("date").textContent = p.date || "";
+        var lines = codeText.split("\n");
+        $("count").textContent = lines.length + (lines.length === 1 ? " line" : " lines");
+        var box = $("lines");
+        lines.forEach(function (l, i) {
+          var r = document.createElement("div"); r.className = "ln";
+          var n = document.createElement("span"); n.textContent = i + 1;
+          var c = document.createElement("span"); c.textContent = l || " ";
+          r.append(n, c); box.append(r);
+        });
       })
-      .catch(function () {
-        $("title").textContent = "Paste not found (if just published, wait ~1 min)";
-        $("gate").classList.add("hide");
-      });
+      .catch(notFound);
+  }
+  function notFound() {
+    $("title").textContent = "";
+    $("body").classList.add("hide");
+    $("missing").classList.remove("hide");
   }
 
-  var a, b;
-  $("human").addEventListener("change", function () {
-    if (!this.checked) return;
-    a = 2 + Math.floor(Math.random() * 8);
-    b = 2 + Math.floor(Math.random() * 8);
-    $("q").textContent = a + " + " + b + " = ?";
-    $("step1").classList.add("hide");
-    $("step2").classList.remove("hide");
-    $("ans").focus();
-  });
+  /* ---------- IMAGE CAPTCHA ---------- */
+  var CATS = [["cats", "🐱"], ["cars", "🚗"], ["trees", "🌳"], ["apples", "🍎"], ["stars", "⭐"], ["fish", "🐟"], ["bikes", "🚲"], ["flowers", "🌸"]];
+  var answer = new Set(), picked = new Set();
+  var R = function (n) { return Math.random() * n; };
 
-  function verify() {
-    if (parseInt($("ans").value, 10) === a + b) {
-      $("code").classList.remove("blur");
-      $("gate").classList.add("hide");
-      $("actions").classList.remove("hide");
-    } else {
-      $("err").textContent = "Wrong answer, try again";
-      a = 2 + Math.floor(Math.random() * 8);
-      b = 2 + Math.floor(Math.random() * 8);
-      $("q").textContent = a + " + " + b + " = ?";
-      $("ans").value = "";
+  function tile(emoji) {
+    var c = document.createElement("canvas"); c.width = c.height = 110;
+    var x = c.getContext("2d");
+    x.fillStyle = "hsl(" + R(360) + ",35%," + (16 + R(12)) + "%)"; x.fillRect(0, 0, 110, 110);
+    for (var i = 0; i < 12; i++) {
+      x.strokeStyle = "hsla(" + R(360) + ",60%,60%,.28)"; x.lineWidth = 1 + R(2);
+      x.beginPath(); x.moveTo(R(110), R(110)); x.lineTo(R(110), R(110)); x.stroke();
     }
+    x.save();
+    x.translate(55 + R(12) - 6, 58 + R(12) - 6); x.rotate((Math.random() - .5) * .7);
+    x.font = (48 + R(16)) + 'px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif';
+    x.textAlign = "center"; x.textBaseline = "middle"; x.fillText(emoji, 0, 0);
+    x.restore();
+    x.fillStyle = "rgba(255,255,255,.14)";
+    for (var j = 0; j < 45; j++) x.fillRect(R(110), R(110), 2, 2);
+    return c;
   }
-  $("verify").addEventListener("click", verify);
-  $("ans").addEventListener("keydown", function (e) { if (e.key === "Enter") verify(); });
 
+  function newChallenge() {
+    var t = CATS[Math.floor(R(CATS.length))];
+    var others = CATS.filter(function (c) { return c !== t; });
+    var count = 2 + Math.floor(R(3));
+    var pos = [0, 1, 2, 3, 4, 5, 6, 7, 8].sort(function () { return Math.random() - .5; }).slice(0, count);
+    answer = new Set(pos); picked = new Set();
+    $("target").textContent = t[0]; $("err").textContent = "";
+    var g = $("grid"); g.innerHTML = "";
+    for (var i = 0; i < 9; i++) (function (i) {
+      var e = answer.has(i) ? t[1] : others[Math.floor(R(others.length))][1];
+      var d = document.createElement("button"); d.type = "button"; d.className = "tile";
+      d.appendChild(tile(e));
+      var k = document.createElement("span"); k.className = "tk"; k.textContent = "✓"; d.appendChild(k);
+      d.onclick = function () {
+        if (picked.has(i)) { picked.delete(i); d.classList.remove("on"); }
+        else { picked.add(i); d.classList.add("on"); }
+      };
+      g.appendChild(d);
+    })(i);
+  }
+
+  $("capbtn").addEventListener("click", function () {
+    if (!$("chal").classList.contains("hide") || $("chk").classList.contains("ok")) return;
+    $("chk").classList.add("spin");
+    setTimeout(function () {
+      $("chk").classList.remove("spin");
+      $("chal").classList.remove("hide");
+      newChallenge();
+    }, 600);
+  });
+  $("refresh").addEventListener("click", newChallenge);
+
+  $("verify").addEventListener("click", function () {
+    var ok = picked.size === answer.size && Array.from(picked).every(function (i) { return answer.has(i); });
+    if (ok) {
+      $("chal").classList.add("hide");
+      $("chk").classList.add("ok"); $("chk").textContent = "✓";
+      $("caplabel").textContent = "Verified — you're human";
+      $("codecard").classList.remove("locked"); $("codecard").classList.add("unlocked");
+      $("state").textContent = "🔓 Unlocked";
+      $("copy").disabled = false; $("copy").textContent = "Copy code";
+    } else {
+      $("err").textContent = "Not quite — try again with new images.";
+      $("grid").classList.add("shake");
+      setTimeout(function () { $("grid").classList.remove("shake"); newChallenge(); $("err").textContent = "Not quite — try again with new images."; }, 350);
+    }
+  });
+
+  /* ---------- COPY + PROTECTION ---------- */
+  function fallbackCopy(t) {
+    var a = document.createElement("textarea"); a.value = t; a.style.position = "fixed"; a.style.opacity = "0";
+    document.body.appendChild(a); a.select(); try { document.execCommand("copy"); } catch (e) {} a.remove();
+  }
   $("copy").addEventListener("click", function () {
-    var btn = this;
-    navigator.clipboard.writeText(codeText).then(function () {
-      btn.textContent = "Copied ✓";
-      setTimeout(function () { btn.textContent = "Copy code"; }, 1800);
-    });
+    var b = this;
+    var done = function () { b.textContent = "Copied ✓"; setTimeout(function () { b.textContent = "Copy code"; }, 1800); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(codeText).then(done, function () { fallbackCopy(codeText); done(); });
+    else { fallbackCopy(codeText); done(); }
+  });
+  ["copy", "cut", "contextmenu", "dragstart", "selectstart"].forEach(function (ev) {
+    $("codecard").addEventListener(ev, function (e) { e.preventDefault(); });
   });
 
-  // Block manual selecting/copying of the displayed code
-  ["copy", "cut", "dragstart", "selectstart"].forEach(function (ev) {
-    $("code").addEventListener(ev, function (e) { e.preventDefault(); });
-  });
+  if (id) initView(); else initHome();
 })();
 </script>
 </body>
