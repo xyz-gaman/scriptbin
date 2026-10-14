@@ -1,334 +1,534 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>Admin · ScriptBin</title>
+<script>document.documentElement.dataset.theme=localStorage.getItem('sb-theme')||'dark';</script>
 <style>
-:root{--bg:#0a0c10;--s1:#11141a;--s2:#161a22;--s3:#1c212b;--line:#222833;--line2:#2c3340;--text:#e8eaf0;--mute:#8b93a5;--acc:#6366f1;--acc2:#8b5cf6;--ok:#22c55e;--bad:#ef4444}
+:root{--bg:#0a0c10;--s1:#11151c;--s2:#171c25;--s3:#20262f;--line:#242b38;--line2:#2c3442;--text:#eceef4;--mute:#8b94a7;--acc:#6366f1;--acc2:#8b5cf6;--ok:#22c55e;--bad:#ef4444;--glow:rgba(99,102,241,.18);--sh:0 10px 30px rgba(0,0,0,.35)}
+html[data-theme=light]{--bg:#f4f5f9;--s1:#fff;--s2:#f0f2f7;--s3:#e6e9f1;--line:#e0e4ee;--line2:#d3d9e6;--text:#141824;--mute:#616b80;--glow:rgba(99,102,241,.1);--sh:0 8px 24px rgba(20,28,50,.08)}
+html.fade *{transition:background-color .4s ease,color .4s ease,border-color .4s ease!important}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
-body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(700px 360px at 50% -80px,rgba(99,102,241,.2),transparent 70%)}
-svg{display:block}
-button{font-family:inherit}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:15px/1.55 Inter,-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(700px 320px at 50% -100px,var(--glow),transparent 70%)}
+button,input,select,textarea{font-family:inherit}
 .hide{display:none!important}
-.nav{position:sticky;top:0;z-index:20;background:rgba(10,12,16,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav-in{max-width:760px;margin:0 auto;height:60px;padding:0 16px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-.2px}
+svg{display:block;flex:none}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 60px}
+.nav{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav-in{max-width:720px;margin:0 auto;height:58px;padding:0 16px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-weight:750;font-size:17px;letter-spacing:-.2px}
 .logo{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff}
-.tagadmin{font-size:10.5px;font-weight:700;letter-spacing:.8px;color:#a5b4fc;background:rgba(99,102,241,.14);border:1px solid rgba(99,102,241,.35);padding:2px 8px;border-radius:99px}
-.vsite{color:var(--mute);font-size:14px;text-decoration:none;display:flex;align-items:center;gap:6px}
-.vsite:hover{color:var(--text)}
-.wrap{max-width:760px;margin:0 auto;padding:0 16px 60px}
-.hero{padding:34px 0 20px}
-.hero h1{font-size:30px;letter-spacing:-.8px;margin:0 0 8px;font-weight:800}
-.hero p{margin:0;color:var(--mute)}
-.panel{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px}
-.ph{display:flex;align-items:center;gap:12px;margin-bottom:6px}
-.step{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:700;font-size:14px;background:rgba(99,102,241,.15);color:#a5b4fc;border:1px solid rgba(99,102,241,.3)}
+.tag{font-size:10.5px;font-weight:700;letter-spacing:.8px;color:#a5b4fc;background:rgba(99,102,241,.14);border:1px solid rgba(99,102,241,.35);padding:2px 8px;border-radius:99px}
+.right{display:flex;align-items:center;gap:12px}
+.sitelink{color:var(--mute);font-size:14px;text-decoration:none}
+.sitelink:hover{color:var(--text)}
+.theme{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--s1);color:var(--text);display:grid;place-items:center;cursor:pointer}
+.theme:hover{border-color:var(--acc)}
+@keyframes spin{from{transform:rotate(-180deg) scale(.6);opacity:.3}to{transform:none;opacity:1}}
+.theme.spin{animation:spin .5s ease}
+.panel{background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:16px;box-shadow:var(--sh)}
+.ph{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+.step{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-weight:700;font-size:14px;background:var(--glow);color:var(--acc);border:1px solid var(--line2)}
 .ph b{display:block;font-size:16px}
-.ph small{color:var(--mute);font-size:13px}
-label{display:block;font-size:12.5px;font-weight:500;color:var(--mute);margin:16px 0 7px}
-input[type=text],input[type=password],select,textarea{width:100%;padding:0 14px;height:48px;border-radius:11px;border:1px solid var(--line2);background:var(--bg);color:var(--text);font-size:16px;outline:none;font-family:inherit}
-select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b93a5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-textarea{height:auto;min-height:280px;padding:14px;resize:vertical;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(99,102,241,.18)}
+.ph small,.muted,.cnt{color:var(--mute);font-size:13px}
+label.l{display:block;font-size:12.5px;font-weight:500;color:var(--mute);margin:16px 0 7px}
+input[type=text],input[type=password],select,textarea{width:100%;padding:0 14px;height:46px;border-radius:11px;border:1px solid var(--line2);background:var(--bg);color:var(--text);font-size:16px;outline:none}
+select{appearance:none;-webkit-appearance:none;padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b94a7' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center}
+textarea{height:auto;min-height:240px;padding:14px;resize:vertical;font:13px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+input:focus,select:focus,textarea:focus{border-color:var(--acc);box-shadow:0 0 0 3px var(--glow)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.btn{width:100%;margin-top:20px;height:50px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-size:15.5px;font-weight:600;cursor:pointer}
+.btn{width:100%;margin-top:18px;height:48px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;border:0;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;font-size:15.5px;font-weight:600;cursor:pointer}
 .btn:disabled{opacity:.55;cursor:wait}
-.btn2{padding:9px 14px;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--text);font-size:13px;cursor:pointer}
-.okrow{display:flex;align-items:center;gap:12px;margin-top:8px}
-.dot{width:10px;height:10px;border-radius:50%;background:var(--ok);flex:none;box-shadow:0 0 0 4px rgba(34,197,94,.15)}
+.btn2{padding:9px 14px;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--text);font-size:13px;cursor:pointer;margin-top:10px}
+.okrow{display:flex;align-items:center;gap:12px;margin-top:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(34,197,94,.15);flex:none}
 .grow{flex:1;min-width:0}
-.okrow b{display:block;font-size:14.5px}
+.okrow b{display:block}
 .okrow small{color:var(--mute);font-size:12.5px}
-.help{margin-top:12px;background:var(--s2);border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-size:13.5px;color:var(--mute)}
+.help{margin-top:14px;background:var(--s2);border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-size:13.5px;color:var(--mute)}
 .help summary{cursor:pointer;color:#a5b4fc;font-weight:500}
 .help ol{margin:10px 0 0;padding-left:20px;line-height:1.8}
 .help b{color:var(--text);font-weight:600}
-.sw{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:14px;color:var(--text);cursor:pointer}
-.sw input{width:20px;height:20px;accent-color:var(--acc);margin:0}
-.msg{margin-top:14px;font-size:14px;line-height:1.5;word-break:break-word}
-.msg.ok{color:var(--ok)}.msg.bad{color:#fca5a5;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);padding:12px 14px;border-radius:10px}
+.msg{margin-top:14px;font-size:14px;line-height:1.5;word-break:break-word;color:var(--ok)}
+.msg.bad{color:#fca5a5;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);padding:12px 14px;border-radius:10px}
 .msg a{color:#86efac;word-break:break-all}
-.msg .btn2{margin-top:10px}
+.switch{position:relative;display:inline-block;width:46px;height:26px;flex:none}
+.switch input{opacity:0;width:0;height:0;position:absolute}
+.switch span{position:absolute;inset:0;background:var(--s3);border:1px solid var(--line2);border-radius:99px;transition:.25s;cursor:pointer}
+.switch span::before{content:"";position:absolute;width:20px;height:20px;left:2px;top:2px;background:#fff;border-radius:50%;transition:.25s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.switch input:checked+span{background:var(--acc);border-color:var(--acc)}
+.switch input:checked+span::before{transform:translateX(20px)}
+.row2{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.row2:first-of-type{border-top:0}
+.row2 b{display:block}
+.masterrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;margin-top:14px;border-radius:12px;background:var(--s2);border:1px solid var(--line)}
+.adblock{margin-top:12px;padding:14px;border-radius:12px;border:1px solid var(--line);background:var(--s2)}
+.adblock textarea{min-height:110px;margin-top:12px;font-size:12.5px}
+.file{display:block;width:100%;margin-top:4px;color:var(--mute);font-size:14px}
+.file::file-selector-button{margin-right:12px;padding:9px 14px;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--text);cursor:pointer}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.thumb{position:relative;aspect-ratio:16/10;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--s3)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.tbar{position:absolute;bottom:4px;left:4px;right:4px;display:flex;justify-content:space-between;gap:4px}
+.tb{width:28px;height:28px;border-radius:8px;border:0;background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center;cursor:pointer}
+.tb:disabled{opacity:.3;cursor:default}
+.tb.x{background:rgba(239,68,68,.85)}
 .lhead{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.pi{display:flex;align-items:center;gap:10px;padding:13px 0;border-top:1px solid var(--line)}
-.pi:first-child{border-top:0}
-.pi .t{flex:1;min-width:0}
-.pi a{display:block;color:var(--text);font-size:14.5px;font-weight:600;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pi small{color:var(--mute);font-size:12px}
-.ib{flex:none;width:36px;height:36px;display:grid;place-items:center;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--mute);cursor:pointer}
+.lhead .btn2{margin-top:0}
+.row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.th{width:64px;height:40px;flex:none;border-radius:8px;overflow:hidden;background:var(--s3);display:grid;place-items:center;color:var(--mute)}
+.th img{width:100%;height:100%;object-fit:cover;display:block}
+.rt{flex:1;min-width:0}
+.rt a{display:block;color:var(--text);font-weight:600;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acts{display:flex;gap:6px;flex:none}
+.ib{width:36px;height:36px;display:grid;place-items:center;border-radius:9px;border:1px solid var(--line2);background:var(--s3);color:var(--mute);cursor:pointer}
 .ib:hover{color:var(--text);border-color:var(--acc)}
 .ib.dg:hover{color:var(--bad);border-color:var(--bad)}
-.muted{color:var(--mute);font-size:14px;padding:6px 0}
-.cnt{color:var(--mute);font-size:12.5px}
+.ib:disabled{opacity:.4}
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-in">
-  <div class="brand"><span class="logo" data-i="prompt" data-s="18"></span>ScriptBin <span class="tagadmin">ADMIN</span></div>
-  <a class="vsite" id="siteLink" href="./">View site<span data-i="ext" data-s="15"></span></a>
-</div></nav>
+<header class="nav"><div class="nav-in">
+  <div class="brand"><span class="logo" id="logo"></span>ScriptBin <span class="tag">ADMIN</span></div>
+  <div class="right"><a class="sitelink" id="site" href="./">View site</a><button class="theme" id="theme" type="button" aria-label="Switch theme"></button></div>
+</div></header>
 
 <main class="wrap">
-  <div class="hero">
-    <h1>Publish a script</h1>
-    <p>Only you can publish. Everything is saved in your GitHub repository.</p>
-  </div>
-
-  <!-- 1 CONNECT -->
-  <section class="panel">
-    <div class="ph"><span class="step">1</span><div><b>Connect GitHub</b><small>One-time setup in this browser</small></div></div>
-    <div id="connOk" class="okrow hide">
-      <span class="dot"></span>
-      <div class="grow"><b id="connName"></b><small>Connected. Only you can publish.</small></div>
-      <button class="btn2" id="changeBtn" type="button">Change</button>
-    </div>
+  <section class="panel" id="connPanel">
+    <div class="ph"><span class="step">1</span><div><b>Connect GitHub</b><small>Saved in this browser only</small></div></div>
+    <div id="connOk" class="okrow hide"><span class="dot"></span><div class="grow"><b id="connName"></b><small>Connected. Only you can publish.</small></div><button class="btn2" id="change" type="button">Change</button></div>
     <div id="connForm">
-      <label>Access token</label>
-      <input type="password" id="token" placeholder="github_pat_..." autocomplete="off" autocapitalize="off" spellcheck="false">
+      <label class="l">Access token</label>
+      <input type="password" id="connToken" placeholder="github_pat_..." autocomplete="off" autocapitalize="off" spellcheck="false">
       <details class="help">
         <summary>How do I get a token?</summary>
         <ol>
-          <li>GitHub &rarr; your profile picture &rarr; <b>Settings</b> &rarr; <b>Developer settings</b></li>
-          <li><b>Personal access tokens</b> &rarr; <b>Fine-grained tokens</b> &rarr; <b>Generate new token</b></li>
-          <li><b>Repository access</b>: Only select repositories &rarr; pick this repo</li>
-          <li><b>Permissions</b> &rarr; Repository permissions &rarr; <b>Contents: Read and write</b></li>
-          <li>Generate and copy it right away (shown only once)</li>
+          <li>GitHub → your profile picture → <b>Settings</b> → <b>Developer settings</b></li>
+          <li><b>Personal access tokens</b> → <b>Fine-grained tokens</b> → <b>Generate new token</b></li>
+          <li><b>Repository access</b>: Only select repositories → pick this repo</li>
+          <li><b>Permissions</b> → Repository permissions → <b>Contents: Read and write</b></li>
+          <li>Generate, then copy it right away (shown only once)</li>
         </ol>
       </details>
       <div class="two">
-        <div><label>GitHub username</label><input type="text" id="owner" autocapitalize="off" autocomplete="off" spellcheck="false"></div>
-        <div><label>Repository name</label><input type="text" id="repo" autocapitalize="off" autocomplete="off" spellcheck="false"></div>
+        <div><label class="l">GitHub username</label><input type="text" id="connOwner" autocapitalize="off" autocomplete="off" spellcheck="false"></div>
+        <div><label class="l">Repository</label><input type="text" id="connRepo" autocapitalize="off" autocomplete="off" spellcheck="false"></div>
       </div>
-      <label>Site URL</label>
-      <input type="text" id="site" autocapitalize="off" autocomplete="off" spellcheck="false">
+      <label class="l">Site URL</label>
+      <input type="text" id="connSite" autocapitalize="off" autocomplete="off" spellcheck="false">
       <button class="btn" id="connect" type="button">Connect</button>
       <div class="msg" id="connMsg"></div>
     </div>
   </section>
 
-  <!-- 2 PUBLISH -->
-  <section class="panel hide" id="pubCard">
-    <div class="ph"><span class="step">2</span><div><b>New script</b><small>Appears on the home page right away</small></div></div>
-    <label>Title</label>
+  <section class="panel hide" id="adsPanel">
+    <div class="ph"><span class="step">2</span><div><b>Ads</b><small>Turn any ad on or off. Changes reach the site within a few minutes.</small></div></div>
+    <div class="masterrow"><div><b>All ads</b><small id="masterState" class="muted"></small></div><label class="switch"><input type="checkbox" id="adsOn"><span></span></label></div>
+
+    <div class="adblock">
+      <div class="row2" style="border:0;padding:0"><div><b>Popunder</b><small class="muted">Opens on the captcha clicks</small></div><label class="switch"><input type="checkbox" id="popOn"><span></span></label></div>
+      <textarea id="popCode" spellcheck="false" placeholder="Paste the popunder code here"></textarea>
+    </div>
+    <div class="adblock">
+      <div class="row2" style="border:0;padding:0"><div><b>Banner 300×250</b><small class="muted">Under each script in the list, and under the code after unlock</small></div><label class="switch"><input type="checkbox" id="banOn"><span></span></label></div>
+      <textarea id="banCode" spellcheck="false" placeholder="Paste the banner code here"></textarea>
+    </div>
+    <div class="adblock">
+      <div class="row2" style="border:0;padding:0"><div><b>Native</b><small class="muted">Replaces the banner in the list when on</small></div><label class="switch"><input type="checkbox" id="natOn"><span></span></label></div>
+      <textarea id="natCode" spellcheck="false" placeholder="Paste the native code here"></textarea>
+    </div>
+    <div class="adblock">
+      <div class="row2" style="border:0;padding:0"><div><b>Smartlink</b><small class="muted">Opens in a new tab when the visitor presses Copy</small></div><label class="switch"><input type="checkbox" id="smOn"><span></span></label></div>
+      <input type="text" id="smUrl" style="margin-top:12px" placeholder="https://..." autocapitalize="off" spellcheck="false">
+    </div>
+    <button class="btn" id="saveAds" type="button">Save ads</button>
+    <div class="msg" id="adsMsg"></div>
+  </section>
+
+  <section class="panel hide" id="editPanel">
+    <div class="ph"><span class="step">3</span><div><b id="editTitle">New script</b><small id="editSub">Appears on the home page after publishing</small></div></div>
+    <label class="l">Title</label>
     <input type="text" id="title" placeholder="e.g. Auto farm script" autocomplete="off">
-    <label>Language</label>
-    <select id="lang">
-      <option>text</option><option>lua</option><option>javascript</option><option>python</option>
-      <option>bash</option><option>html</option><option>css</option><option>java</option><option>c++</option><option>json</option>
-    </select>
-    <label>Code <span class="cnt" id="chars" style="float:right"></span></label>
-    <textarea id="code" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="Paste your script here"></textarea>
-    <label class="sw"><input type="checkbox" id="listed" checked> Show on the public home page</label>
-    <button class="btn" id="pub" type="button">Publish</button>
+    <div class="two">
+      <div><label class="l">Language</label>
+        <select id="lang">
+          <option>text</option><option>lua</option><option>javascript</option><option>python</option>
+          <option>bash</option><option>html</option><option>css</option><option>java</option><option>c++</option><option>json</option>
+        </select></div>
+      <div><label class="l">Visibility</label>
+        <select id="vis"><option value="1">Public</option><option value="0">Hidden</option></select></div>
+    </div>
+    <label class="l">Cover images <span class="cnt" id="imgHint">0 of 4 images</span></label>
+    <input type="file" id="imgs" class="file" accept="image/*" multiple>
+    <div class="thumbs" id="thumbs"></div>
+    <label class="l">Code <span class="cnt" id="chars" style="float:right"></span></label>
+    <textarea id="code" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="Paste the script here"></textarea>
+    <button class="btn" id="publish" type="button">Publish</button>
+    <button class="btn2 hide" id="cancelEdit" type="button" style="width:100%;margin-top:8px">Cancel edit</button>
     <div class="msg" id="pubMsg"></div>
   </section>
 
-  <!-- 3 LIBRARY -->
-  <section class="panel hide" id="listCard">
+  <section class="panel hide" id="libPanel">
     <div class="lhead">
-      <div class="ph" style="margin:0"><span class="step">3</span><div><b>Your scripts</b><small id="lcount"></small></div></div>
-      <button class="btn2" id="rebuild" type="button">Refresh list</button>
+      <div class="ph" style="margin:0"><span class="step">4</span><div><b>Library</b><small id="lcount"></small></div></div>
+      <button class="btn2" id="rebuild" type="button">Rebuild list</button>
     </div>
-    <div id="plist" style="margin-top:10px"><div class="muted">Loading…</div></div>
+    <div id="plist" style="margin-top:8px"></div>
   </section>
 </main>
 
 <script>
-(function () {
-  var $ = function (i) { return document.getElementById(i); };
-  var P = {
-    prompt: '<path d="M5 8l5 4-5 4"/><path d="M13 16h6"/>',
-    ext: '<path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><path d="M15 3h6v6M10 14L21 3"/>',
-    link: '<path d="M10 13a5 5 0 007.5.5l3-3a5 5 0 00-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 00-7.5-.5l-3 3a5 5 0 007 7l1.7-1.7"/>',
-    trash: '<path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/>',
-    eye: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',
-    "eye-off": '<path d="M17.9 17.9A10.9 10.9 0 0112 20C5 20 1 12 1 12a18.5 18.5 0 015.1-5.9M9.9 4.2A9.1 9.1 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.2 3.2M14.1 14.1a3 3 0 11-4.2-4.2"/><path d="M1 1l22 22"/>',
-    check: '<path d="M20 6L9 17l-5-5"/>'
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;};
+const P={
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+ moon:'<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>',
+ code:'<path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>',
+ left:'<path d="M15 18l-6-6 6-6"/>',
+ right:'<path d="M9 18l6-6-6-6"/>',
+ x:'<path d="M18 6L6 18M6 6l12 12"/>',
+ pen:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+ link:'<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
+ eye:'<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>',
+ eyeoff:'<path d="M17.9 17.9A10.9 10.9 0 0 1 12 20C5 20 1 12 1 12a18.5 18.5 0 0 1 5.1-5.9M9.9 4.2A9.1 9.1 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.2 3.2M14.1 14.1a3 3 0 1 1-4.2-4.2"/><path d="M1 1l22 22"/>',
+ trash:'<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>',
+ check:'<path d="M20 6L9 17l-5-5"/>'
+};
+const ic=(n,s=18)=>'<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+(P[n]||'')+'</svg>';
+const put=(id,n,s)=>{const e=$(id);if(e)e.innerHTML=ic(n,s);};
+function ago(ts){
+  if(!ts) return '';
+  const s=Math.max(0,(Date.now()-ts)/1000);
+  const pl=(n,u)=>n+' '+u+(n===1?'':'s')+' ago';
+  if(s<60) return 'just now';
+  const m=Math.floor(s/60); if(m<60) return pl(m,'minute');
+  const h=Math.floor(m/60); if(h<24) return pl(h,'hour');
+  const d=Math.floor(h/24); if(d<7) return pl(d,'day');
+  if(d<365) return pl(Math.floor(d/7),'week');
+  return pl(Math.floor(d/365),'year');
+}
+
+/* theme */
+const root=document.documentElement;
+function paintTheme(){ put('theme', root.dataset.theme==='dark'?'sun':'moon', 18); }
+$('theme').onclick=function(){
+  const next=root.dataset.theme==='dark'?'light':'dark';
+  root.classList.add('fade'); root.dataset.theme=next; localStorage.setItem('sb-theme',next);
+  paintTheme();
+  this.classList.remove('spin'); void this.offsetWidth; this.classList.add('spin');
+  setTimeout(()=>root.classList.remove('fade'),450);
+};
+paintTheme(); put('logo','code',18);
+
+/* config */
+const KEY='sb-cfg3';
+const cfg={owner:'',repo:'',token:'',site:''};
+try{Object.assign(cfg,JSON.parse(localStorage.getItem(KEY)||'{}'));}catch(e){}
+if(!cfg.owner&&/github\.io$/.test(location.hostname)) cfg.owner=location.hostname.split('.')[0];
+if(!cfg.repo) cfg.repo=location.pathname.split('/')[1]||'';
+if(!cfg.site) cfg.site=location.origin+location.pathname.replace(/admin\.html.*$/,'');
+$('connToken').value=cfg.token||''; $('connOwner').value=cfg.owner||''; $('connRepo').value=cfg.repo||''; $('connSite').value=cfg.site||'';
+$('site').href=cfg.site||'./';
+
+const enc=s=>btoa(unescape(encodeURIComponent(s)));
+const dec=b=>decodeURIComponent(escape(atob(b.replace(/\n/g,''))));
+function say(id,text,type){const e=$(id);e.className='msg'+(type==='bad'?' bad':'');e.textContent=text;}
+function nice(e){
+  const m=(e&&e.message)||'';
+  if(e.status===401) return 'GitHub rejected the token (401). It is wrong, expired, or part of it went missing. Create a new token and paste it again.';
+  if(e.status===403||m==='nopush') return 'The token has no permission to write here (403). Set Repository permissions → Contents to "Read and write" and select this repository.';
+  if(e.status===404) return 'Not found (404). Check the username ("'+cfg.owner+'"), the repository name ("'+cfg.repo+'"), and that the token has access to that repository.';
+  if(e.status===422||e.status===409) return 'GitHub reported a conflict ('+e.status+'). Try again in a moment.';
+  if(!e.status) return 'Network problem. Check your internet connection and try again.';
+  return m;
+}
+
+/* GitHub helpers */
+async function gh(path,method='GET',body,raw){
+  const url='https://api.github.com/repos/'+cfg.owner+'/'+cfg.repo+(path?'/'+path:'');
+  const r=await fetch(url,{method,cache:'no-store',
+    headers:{Authorization:'Bearer '+cfg.token,Accept:raw?'application/vnd.github.raw+json':'application/vnd.github+json'},
+    body:body?JSON.stringify(body):undefined});
+  if(raw){ if(!r.ok){const e=new Error(String(r.status));e.status=r.status;throw e;} return r.text(); }
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok){const e=new Error(j.message||String(r.status));e.status=r.status;throw e;}
+  return j;
+}
+async function getFile(path){
+  try{
+    const meta=await gh('contents/'+path);
+    const text=await gh('contents/'+path,'GET',null,true);
+    return {sha:meta.sha,text};
+  }catch(e){ if(e.status===404) return null; throw e; }
+}
+function putFile(path,text,sha,msg){
+  const b={message:msg,content:enc(text)}; if(sha) b.sha=sha;
+  return gh('contents/'+path,'PUT',b);
+}
+async function readIndex(){
+  const f=await getFile('pastes/index.json');
+  return {sha:f?f.sha:null,list:f?(JSON.parse(f.text)||[]):[]};
+}
+function writeIndex(list,sha,msg){
+  return putFile('pastes/index.json',JSON.stringify(list),sha,msg);
+}
+const rid=()=>{const c='abcdefghijklmnopqrstuvwxyz0123456789';const a=new Uint8Array(8);crypto.getRandomValues(a);let s='';for(let i=0;i<8;i++)s+=c[a[i]%c.length];return s;};
+
+/* connect */
+$('connect').onclick=async function(){
+  cfg.token=$('connToken').value.replace(/\s+/g,'');
+  cfg.owner=$('connOwner').value.trim();
+  cfg.repo=$('connRepo').value.trim();
+  let s=$('connSite').value.trim(); if(s&&s.slice(-1)!=='/') s+='/'; cfg.site=s;
+  if(!cfg.token) return say('connMsg','Paste your access token first.','bad');
+  if(!cfg.owner||!cfg.repo||!cfg.site) return say('connMsg','Fill in username, repository and site URL.','bad');
+  this.disabled=true; say('connMsg','Connecting…');
+  try{
+    const j=await gh('');
+    if(j.permissions&&!j.permissions.push){const e=new Error('nopush');e.status=403;throw e;}
+    localStorage.setItem(KEY,JSON.stringify(cfg));
+    say('connMsg',''); $('connMsg').className='msg';
+    showConnected();
+  }catch(e){ say('connMsg',nice(e),'bad'); }
+  this.disabled=false;
+};
+function showConnected(){
+  $('connForm').classList.add('hide'); $('connOk').classList.remove('hide');
+  $('connName').textContent=cfg.owner+' / '+cfg.repo;
+  $('site').href=cfg.site;
+  ['adsPanel','editPanel','libPanel'].forEach(i=>$(i).classList.remove('hide'));
+  loadAds(); loadLib();
+}
+$('change').onclick=()=>{
+  $('connForm').classList.remove('hide'); $('connOk').classList.add('hide');
+  ['adsPanel','editPanel','libPanel'].forEach(i=>$(i).classList.add('hide'));
+};
+
+/* ads */
+function paintAds(a){
+  a=a||{};
+  $('adsOn').checked=!!a.enabled;
+  $('popOn').checked=!!(a.popunder&&a.popunder.on); $('popCode').value=(a.popunder&&a.popunder.code)||'';
+  $('banOn').checked=!!(a.banner&&a.banner.on);     $('banCode').value=(a.banner&&a.banner.code)||'';
+  $('natOn').checked=!!(a.native&&a.native.on);     $('natCode').value=(a.native&&a.native.code)||'';
+  $('smOn').checked=!!(a.smartlink&&a.smartlink.on); $('smUrl').value=(a.smartlink&&a.smartlink.url)||'';
+  paintMaster();
+}
+function paintMaster(){ $('masterState').textContent=$('adsOn').checked?'Ads are running on the site':'All ads are off'; }
+$('adsOn').addEventListener('change',paintMaster);
+async function loadAds(){
+  try{ const f=await getFile('pastes/ads.json'); paintAds(f?JSON.parse(f.text):{}); }
+  catch(e){ say('adsMsg',nice(e),'bad'); }
+}
+$('saveAds').onclick=async function(){
+  const data={
+    enabled:$('adsOn').checked,
+    popunder:{on:$('popOn').checked,code:$('popCode').value.trim()},
+    banner:{on:$('banOn').checked,code:$('banCode').value.trim()},
+    native:{on:$('natOn').checked,code:$('natCode').value.trim()},
+    smartlink:{on:$('smOn').checked,url:$('smUrl').value.trim()}
   };
-  function ic(n, s) {
-    s = s || 18;
-    return '<svg viewBox="0 0 24 24" width="' + s + '" height="' + s + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + P[n] + '</svg>';
-  }
-  document.querySelectorAll("[data-i]").forEach(function (e) { e.innerHTML = ic(e.getAttribute("data-i"), +e.getAttribute("data-s") || 18); });
-  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  if(data.popunder.on&&!data.popunder.code) return say('adsMsg','Popunder is on but its code box is empty.','bad');
+  if(data.banner.on&&!data.banner.code) return say('adsMsg','Banner is on but its code box is empty.','bad');
+  if(data.smartlink.on&&!data.smartlink.url) return say('adsMsg','Smartlink is on but its URL is empty.','bad');
+  this.disabled=true; say('adsMsg','Saving…');
+  try{
+    const f=await getFile('pastes/ads.json');
+    await putFile('pastes/ads.json',JSON.stringify(data,null,1),f?f.sha:null,'Ads: update');
+    say('adsMsg','Saved. Changes reach the site within a few minutes.');
+  }catch(e){ say('adsMsg',nice(e),'bad'); }
+  this.disabled=false;
+};
 
-  var cfg = { owner: "", repo: "", token: "", site: "" };
-  try { Object.assign(cfg, JSON.parse(localStorage.getItem("sv_cfg2") || "{}")); } catch (e) {}
-  if (!cfg.owner && /github\.io$/.test(location.hostname)) cfg.owner = location.hostname.split(".")[0];
-  if (!cfg.repo) cfg.repo = location.pathname.split("/")[1] || "";
-  if (!cfg.site) cfg.site = location.origin + location.pathname.replace(/admin\.html.*$/, "");
-  ["token", "owner", "repo", "site"].forEach(function (k) { $(k).value = cfg[k] || ""; });
-  $("siteLink").href = cfg.site || "./";
+/* editor */
+let editing=null, images=[];
+function renderThumbs(){
+  const box=$('thumbs'); box.replaceChildren();
+  images.forEach((src,i)=>{
+    const t=el('div','thumb');
+    const im=document.createElement('img'); im.src=src; t.append(im);
+    const bar=el('div','tbar');
+    const mk=(icon,title,fn,dis,cls)=>{const b=el('button','tb'+(cls?' '+cls:''));b.type='button';b.title=title;b.innerHTML=ic(icon,14);b.disabled=!!dis;b.onclick=fn;return b;};
+    bar.append(
+      mk('left','Move left',()=>swap(i,i-1),i===0),
+      mk('right','Move right',()=>swap(i,i+1),i===images.length-1),
+      mk('x','Remove',()=>{images.splice(i,1);renderThumbs();},false,'x')
+    );
+    t.append(bar); box.append(t);
+  });
+  $('imgHint').textContent=images.length+' of 4 images';
+}
+function swap(a,b){ if(b<0||b>=images.length) return; [images[a],images[b]]=[images[b],images[a]]; renderThumbs(); }
+function shrink(file){
+  return new Promise((res,rej)=>{
+    const url=URL.createObjectURL(file), im=new Image();
+    im.onload=()=>{
+      const s=Math.min(1,480/Math.max(im.width,im.height));
+      const c=document.createElement('canvas');
+      c.width=Math.max(1,Math.round(im.width*s)); c.height=Math.max(1,Math.round(im.height*s));
+      c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+      URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg',.6));
+    };
+    im.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('Could not read one of the images. Try JPG or PNG.'));};
+    im.src=url;
+  });
+}
+$('imgs').onchange=async function(e){
+  const files=[...e.target.files]; e.target.value='';
+  for(const f of files){
+    if(images.length>=4){ say('pubMsg','Maximum 4 cover images.','bad'); break; }
+    try{ images.push(await shrink(f)); }catch(err){ say('pubMsg',err.message,'bad'); }
+  }
+  renderThumbs();
+};
+$('code').addEventListener('input',function(){ $('chars').textContent=this.value.length+' characters'; });
 
-  function say(e, text, type) { e.className = "msg " + (type || ""); e.textContent = text; }
-  var enc = function (s) { return btoa(unescape(encodeURIComponent(s))); };
-  var dec = function (b) { return decodeURIComponent(escape(atob(b.replace(/\n/g, "")))); };
+function resetForm(){
+  editing=null; images=[];
+  $('title').value=''; $('code').value=''; $('chars').textContent=''; $('vis').value='1'; $('lang').value='text';
+  $('editTitle').textContent='New script'; $('editSub').textContent='Appears on the home page after publishing';
+  $('publish').textContent='Publish'; $('cancelEdit').classList.add('hide');
+  renderThumbs();
+}
+$('cancelEdit').onclick=()=>{ resetForm(); $('pubMsg').textContent=''; };
 
-  function nice(e) {
-    var m = (e.message || "").toLowerCase();
-    if (e.status === 401) return "GitHub rejected the token (401). It is wrong, expired or copied with a missing part. Create a new token and paste it again.";
-    if (e.status === 403 || m.indexOf("not accessible") > -1) return "The token has no permission (403). When creating it, select this repository and set Permissions > Contents to \"Read and write\".";
-    if (e.status === 404) return "Not found (404). Check that the username is \"" + cfg.owner + "\", the repository is \"" + cfg.repo + "\", and that the token has access to that repository.";
-    if (e.status === 409 || e.status === 422) return "GitHub reported a conflict (" + e.status + "): " + e.message + ". Please try again.";
-    if (!e.status) return "Network problem. Check your internet connection and try again.";
-    return e.message;
-  }
+function showDone(link,isNew){
+  const m=$('pubMsg'); m.className='msg'; m.replaceChildren();
+  m.append(isNew?'Published. Your link: ':'Saved. Your link: ');
+  const a=el('a','',link); a.href=link; a.target='_blank'; m.append(a);
+  const c=el('button','btn2','Copy link'); c.type='button';
+  c.onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(link).catch(()=>{}); c.textContent='Copied';};
+  m.append(document.createElement('br'),c);
+}
 
-  async function gh(path, method, body) {
-    var url = "https://api.github.com/repos/" + cfg.owner + "/" + cfg.repo + (path ? "/" + path : "");
-    var r = await fetch(url, {
-      method: method || "GET", cache: "no-store",
-      headers: { Authorization: "Bearer " + cfg.token, Accept: "application/vnd.github+json" },
-      body: body ? JSON.stringify(body) : undefined
-    });
-    var j = await r.json().catch(function () { return {}; });
-    if (!r.ok) { var e = new Error(j.message || String(r.status)); e.status = r.status; throw e; }
-    return j;
-  }
-  async function readIndex() {
-    try { var j = await gh("contents/pastes/index.json"); return { sha: j.sha, list: JSON.parse(dec(j.content)) }; }
-    catch (e) { if (e.status === 404) return { sha: null, list: [] }; throw e; }
-  }
-  function writeIndex(list, sha, msg) {
-    var b = { message: msg, content: enc(JSON.stringify(list, null, 1)) };
-    if (sha) b.sha = sha;
-    return gh("contents/pastes/index.json", "PUT", b);
-  }
-  // Scan the pastes folder and rebuild the public list (also picks up older scripts)
-  async function rebuild() {
-    var files;
-    try { files = await gh("contents/pastes"); } catch (e) { if (e.status === 404) files = []; else throw e; }
-    var old = await readIndex(), known = {};
-    old.list.forEach(function (p) { known[p.id] = p; });
-    var list = [];
-    for (var i = 0; i < files.length; i++) {
-      var f = files[i];
-      if (!/^[a-z0-9]{6,16}\.json$/.test(f.name)) continue;
-      var id = f.name.replace(".json", "");
-      try {
-        var j = await gh("contents/pastes/" + f.name), p = JSON.parse(dec(j.content));
-        list.push({ id: id, title: p.title || "Untitled", lang: p.lang || "text", date: p.date || "", listed: known[id] ? known[id].listed !== false : true, lines: (p.code || "").split("\n").length });
-      } catch (e) {}
+$('publish').onclick=async function(){
+  const code=$('code').value;
+  if(!code.trim()) return say('pubMsg','The code box is empty.','bad');
+  const title=$('title').value.trim()||'Untitled';
+  const lang=$('lang').value, listed=$('vis').value==='1';
+  const id=editing?editing.id:rid(), at=editing?editing.at:Date.now();
+  this.disabled=true; say('pubMsg','Saving…');
+  try{
+    const cur=await getFile('pastes/'+id+'.json');
+    await putFile('pastes/'+id+'.json',JSON.stringify({id,title,lang,at,images,code}),cur?cur.sha:null,(editing?'Edit':'Add')+' script '+id);
+    const ix=await readIndex();
+    const list=ix.list.filter(p=>p.id!==id);
+    list.push({id,title,lang,at,listed,images,lines:code.split('\n').length});
+    list.sort((a,b)=>(b.at||0)-(a.at||0));
+    await writeIndex(list,ix.sha,'List: '+(editing?'edit ':'add ')+id);
+    const wasNew=!editing;
+    resetForm();
+    showDone(cfg.site+'?id='+id,wasNew);
+    loadLib();
+  }catch(e){ say('pubMsg',nice(e),'bad'); }
+  this.disabled=false;
+};
+
+async function startEdit(p){
+  try{
+    const f=await getFile('pastes/'+p.id+'.json');
+    if(!f){ say('pubMsg','That script file is missing from the repo.','bad'); return; }
+    const d=JSON.parse(f.text);
+    editing={id:p.id,at:d.at||p.at};
+    $('title').value=d.title||''; $('lang').value=d.lang||'text';
+    $('vis').value=p.listed===false?'0':'1';
+    $('code').value=d.code||''; $('chars').textContent=(d.code||'').length+' characters';
+    images=(d.images||[]).slice(0,4); renderThumbs();
+    $('editTitle').textContent='Edit script'; $('editSub').textContent='Changes keep the same link and upload time';
+    $('publish').textContent='Save changes'; $('cancelEdit').classList.remove('hide');
+    say('pubMsg',''); $('pubMsg').className='msg';
+    $('editPanel').scrollIntoView({behavior:'smooth'});
+  }catch(e){ say('pubMsg',nice(e),'bad'); }
+}
+
+/* library */
+function btn(icon,title,fn,cls){
+  const b=el('button','ib'+(cls?' '+cls:''));
+  b.type='button'; b.title=title; b.setAttribute('aria-label',title);
+  b.innerHTML=ic(icon,16); b.onclick=fn; return b;
+}
+async function loadLib(){
+  const box=$('plist'); box.replaceChildren(el('div','muted','Loading…'));
+  try{
+    const ix=await readIndex();
+    renderLib(ix.list);
+  }catch(e){ box.replaceChildren(); const m=el('div','msg bad',nice(e)); box.append(m); }
+}
+function renderLib(list){
+  const box=$('plist'); box.replaceChildren();
+  $('lcount').textContent=list.length+(list.length===1?' script':' scripts');
+  if(!list.length){ box.append(el('div','muted','Nothing published yet. Your scripts will appear here.')); return; }
+  list.forEach(p=>{
+    const row=el('div','row');
+    const th=el('div','th');
+    if(p.images&&p.images[0]){const im=document.createElement('img');im.src=p.images[0];th.append(im);} else th.innerHTML=ic('code',18);
+    const t=el('div','rt');
+    const a=el('a','',p.title||'Untitled'); a.href=cfg.site+'?id='+p.id; a.target='_blank';
+    t.append(a, el('small','',[p.lang,ago(p.at),p.listed===false?'hidden':'public'].filter(Boolean).join(' · ')));
+    const acts=el('div','acts');
+    acts.append(
+      btn('pen','Edit',()=>startEdit(p)),
+      btn('link','Copy link',function(){navigator.clipboard&&navigator.clipboard.writeText(cfg.site+'?id='+p.id);this.innerHTML=ic('check',16);setTimeout(()=>{this.innerHTML=ic('link',16);},1400);}),
+      btn(p.listed===false?'eyeoff':'eye',p.listed===false?'Show on home':'Hide from home',()=>toggleVis(p.id)),
+      btn('trash','Delete',()=>removeScript(p),'dg')
+    );
+    row.append(th,t,acts); box.append(row);
+  });
+}
+async function toggleVis(id){
+  try{
+    const ix=await readIndex();
+    const e=ix.list.find(x=>x.id===id); if(!e) return;
+    e.listed=e.listed===false;
+    await writeIndex(ix.list,ix.sha,'List: visibility '+id);
+    loadLib();
+  }catch(err){ alert(nice(err)); }
+}
+async function removeScript(p){
+  if(!confirm('Delete "'+(p.title||'Untitled')+'"? This cannot be undone.')) return;
+  try{
+    const f=await getFile('pastes/'+p.id+'.json');
+    if(f) await gh('contents/pastes/'+p.id+'.json','DELETE',{message:'Delete '+p.id,sha:f.sha});
+    const ix=await readIndex();
+    await writeIndex(ix.list.filter(x=>x.id!==p.id),ix.sha,'List: remove '+p.id);
+    if(editing&&editing.id===p.id) resetForm();
+    loadLib();
+  }catch(e){ alert(nice(e)); }
+}
+$('rebuild').onclick=async function(){
+  this.disabled=true;
+  try{
+    let dir=[];
+    try{ dir=await gh('contents/pastes'); }catch(e){ if(e.status!==404) throw e; }
+    const old=await readIndex(); const seen={};
+    old.list.forEach(p=>{seen[p.id]=p;});
+    const list=[];
+    for(const f of (Array.isArray(dir)?dir:[])){
+      if(f.type!=='file'||!/^[a-z0-9]{6,16}\.json$/.test(f.name)) continue;
+      const id=f.name.slice(0,-5);
+      const file=await getFile('pastes/'+f.name);
+      if(!file) continue;
+      const d=JSON.parse(file.text);
+      list.push({id,title:d.title||'Untitled',lang:d.lang||'text',at:d.at||Date.now(),
+        listed:seen[id]?seen[id].listed!==false:true,images:d.images||[],lines:(d.code||'').split('\n').length});
     }
-    list.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
-    await writeIndex(list, old.sha, "Rebuild script list");
-    return list;
-  }
+    list.sort((a,b)=>(b.at||0)-(a.at||0));
+    await writeIndex(list,old.sha,'List: rebuild');
+    renderLib(list);
+  }catch(e){ alert(nice(e)); }
+  this.disabled=false;
+};
 
-  /* ---------- connect ---------- */
-  function showConnected() {
-    $("connForm").classList.add("hide"); $("connOk").classList.remove("hide");
-    $("connName").textContent = cfg.owner + " / " + cfg.repo;
-    $("pubCard").classList.remove("hide"); $("listCard").classList.remove("hide");
-    $("siteLink").href = cfg.site;
-    loadList();
-  }
-  $("connect").onclick = async function () {
-    var btn = this;
-    cfg.token = $("token").value.replace(/\s+/g, ""); cfg.owner = $("owner").value.trim();
-    cfg.repo = $("repo").value.trim(); cfg.site = $("site").value.trim();
-    if (cfg.site && cfg.site.slice(-1) !== "/") cfg.site += "/";
-    if (!cfg.token) return say($("connMsg"), "Paste your access token first.", "bad");
-    if (!cfg.owner || !cfg.repo || !cfg.site) return say($("connMsg"), "Fill in username, repository and site URL.", "bad");
-    btn.disabled = true; say($("connMsg"), "Connecting…");
-    try {
-      await gh("");
-      try { localStorage.setItem("sv_cfg2", JSON.stringify(cfg)); } catch (e) {}
-      say($("connMsg"), ""); showConnected();
-    } catch (e) { say($("connMsg"), nice(e), "bad"); }
-    btn.disabled = false;
-  };
-  $("changeBtn").onclick = function () {
-    $("connForm").classList.remove("hide"); $("connOk").classList.add("hide");
-    $("pubCard").classList.add("hide"); $("listCard").classList.add("hide");
-  };
-
-  /* ---------- publish ---------- */
-  $("code").addEventListener("input", function () { $("chars").textContent = this.value.length + " characters"; });
-  function rid() {
-    var c = "abcdefghijklmnopqrstuvwxyz0123456789", s = "", a = new Uint8Array(8);
-    crypto.getRandomValues(a); for (var i = 0; i < 8; i++) s += c[a[i] % c.length]; return s;
-  }
-  $("pub").onclick = async function () {
-    var btn = this, code = $("code").value;
-    if (!code.trim()) return say($("pubMsg"), "The code box is empty.", "bad");
-    var id = rid();
-    var meta = { id: id, title: $("title").value.trim() || "Untitled", lang: $("lang").value, date: new Date().toISOString().slice(0, 10), listed: $("listed").checked, lines: code.split("\n").length };
-    btn.disabled = true; say($("pubMsg"), "Publishing…");
-    var step = "file";
-    try {
-      await gh("contents/pastes/" + id + ".json", "PUT", { message: "Add script " + id, content: enc(JSON.stringify({ title: meta.title, lang: meta.lang, date: meta.date, code: code })) });
-      step = "index";
-      var ix = await readIndex(); ix.list.unshift(meta);
-      await writeIndex(ix.list, ix.sha, "List: add " + id);
-      var link = cfg.site + "?id=" + id;
-      var m = $("pubMsg"); m.className = "msg ok"; m.innerHTML = "";
-      m.append(document.createTextNode("Published. Your link:"), document.createElement("br"));
-      var a = el("a", "", link); a.href = link; a.target = "_blank"; m.append(a, document.createElement("br"));
-      var cp = el("button", "btn2", "Copy link"); cp.type = "button";
-      cp.onclick = function () { navigator.clipboard.writeText(link); cp.textContent = "Copied"; };
-      m.append(cp);
-      $("code").value = ""; $("title").value = ""; $("chars").textContent = "";
-      loadList();
-    } catch (e) {
-      say($("pubMsg"), (step === "index" ? "The script was saved, but updating the home list failed. Tap \"Refresh list\" below. " : "") + nice(e), "bad");
-    }
-    btn.disabled = false;
-  };
-
-  /* ---------- library ---------- */
-  function ib(name, title, cls) {
-    var b = el("button", "ib " + (cls || "")); b.type = "button"; b.title = title; b.setAttribute("aria-label", title); b.innerHTML = ic(name, 16); return b;
-  }
-  async function loadList(forceRebuild) {
-    var box = $("plist"); box.innerHTML = ""; box.append(el("div", "muted", "Loading…"));
-    try {
-      var ix = await readIndex(), list = ix.list;
-      if (forceRebuild || !ix.sha) list = await rebuild();
-      box.innerHTML = "";
-      $("lcount").textContent = list.length + (list.length === 1 ? " script" : " scripts");
-      if (!list.length) { box.append(el("div", "muted", "Nothing published yet.")); return; }
-      list.forEach(function (p) {
-        var row = el("div", "pi"), t = el("div", "t");
-        var a = el("a", "", p.title); a.href = cfg.site + "?id=" + p.id; a.target = "_blank";
-        t.append(a, el("small", "", [p.lang, p.date, p.lines ? p.lines + " lines" : "", p.listed === false ? "hidden" : "public"].filter(Boolean).join("  ·  ")));
-        var c = ib("link", "Copy link");
-        c.onclick = function () { navigator.clipboard.writeText(cfg.site + "?id=" + p.id); c.innerHTML = ic("check", 16); setTimeout(function () { c.innerHTML = ic("link", 16); }, 1400); };
-        var v = ib(p.listed === false ? "eye-off" : "eye", p.listed === false ? "Hidden from home. Tap to show" : "Public. Tap to hide");
-        v.onclick = function () { toggle(p, v); };
-        var d = ib("trash", "Delete", "dg"); d.onclick = function () { remove(p, d); };
-        row.append(t, c, v, d); box.append(row);
-      });
-    } catch (e) { box.innerHTML = ""; var m = el("div", "msg bad"); m.textContent = nice(e); box.append(m); }
-  }
-  $("rebuild").onclick = function () { loadList(true); };
-  async function toggle(p, btn) {
-    btn.disabled = true;
-    try {
-      var ix = await readIndex(), q = ix.list.find(function (x) { return x.id === p.id; });
-      if (q) { q.listed = q.listed === false; await writeIndex(ix.list, ix.sha, "List: toggle " + p.id); }
-      loadList();
-    } catch (e) { alert(nice(e)); btn.disabled = false; }
-  }
-  async function remove(p, btn) {
-    if (!confirm("Delete \"" + p.title + "\"? This cannot be undone.")) return;
-    btn.disabled = true;
-    try {
-      try {
-        var f = await gh("contents/pastes/" + p.id + ".json");
-        await gh("contents/pastes/" + p.id + ".json", "DELETE", { message: "Delete script " + p.id, sha: f.sha });
-      } catch (e) { if (e.status !== 404) throw e; }
-      var ix = await readIndex();
-      await writeIndex(ix.list.filter(function (x) { return x.id !== p.id; }), ix.sha, "List: remove " + p.id);
-      loadList();
-    } catch (e) { alert(nice(e)); btn.disabled = false; }
-  }
-
-  if (cfg.token) $("connect").click();
+/* start */
+renderThumbs();
+if(cfg.token&&cfg.owner&&cfg.repo) $('connect').click();
 })();
 </script>
 </body>
