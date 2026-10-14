@@ -1,0 +1,8 @@
+{
+ "reportOn": true,
+ "email": "arg96171@gmail.com",
+ "brokenSubject": "Not working: {title}",
+ "brokenBody": "Hi,\n\nThe script below is not working for me.\n\nScript: {title}\nGame: {game}\nUploaded: {date}\nLink: {url}\n\nWhat happened:\n",
+ "reportSubject": "Report: {title}",
+ "reportBody": "Hi,\n\nI want to report a problem with this script.\n\nScript: {title}\nGame: {game}\nLink: {url}\n\nWhat went wrong:\n"
+}
