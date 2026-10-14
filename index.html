@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Script Vault</title>
+<style>
+  :root { --bg:#0f1115; --card:#181b22; --line:#2a2f3a; --text:#e6e8ee; --mute:#8b93a7; --acc:#6c8cff; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:system-ui,sans-serif; padding:16px; }
+  .wrap { max-width:820px; margin:0 auto; }
+  h1 { font-size:20px; margin:8px 0 4px; }
+  .meta { color:var(--mute); font-size:13px; margin-bottom:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px; }
+  .codebox { position:relative; }
+  pre { margin:0; padding:14px; background:#0b0d11; border:1px solid var(--line); border-radius:10px;
+        overflow:auto; max-height:60vh; font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;
+        user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; transition:filter .3s; }
+  pre.blur { filter:blur(7px); pointer-events:none; }
+  .gate { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:12px; }
+  .gate .box { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; width:100%; max-width:320px; text-align:center; }
+  button { background:var(--acc); color:#fff; border:0; border-radius:8px; padding:10px 16px; font-size:15px; cursor:pointer; }
+  button.ghost { background:transparent; border:1px solid var(--line); color:var(--text); }
+  input { width:100%; padding:10px; border-radius:8px; border:1px solid var(--line); background:#0b0d11; color:var(--text); font-size:16px; margin:8px 0; text-align:center; }
+  .row { display:flex; gap:8px; margin-top:12px; align-items:center; justify-content:space-between; }
+  .err { color:#ff7a7a; font-size:13px; min-height:18px; }
+  .check { display:flex; align-items:center; gap:10px; justify-content:center; font-size:15px; cursor:pointer; padding:6px; }
+  .check input { width:22px; height:22px; margin:0; }
+  .hide { display:none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1 id="title">Loading…</h1>
+  <div class="meta" id="meta"></div>
+  <div class="card">
+    <div class="codebox">
+      <pre id="code" class="blur" oncontextmenu="return false"></pre>
+      <div class="gate" id="gate">
+        <div class="box">
+          <div id="step1">
+            <label class="check"><input type="checkbox" id="human"> I am human</label>
+          </div>
+          <div id="step2" class="hide">
+            <div id="q" style="font-size:18px"></div>
+            <input id="ans" inputmode="numeric" placeholder="Answer">
+            <button id="verify">Verify</button>
+            <div class="err" id="err"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row hide" id="actions">
+      <span class="meta" id="lines"></span>
+      <button id="copy">Copy code</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var codeText = "";
+  var $ = function (id) { return document.getElementById(id); };
+  var id = new URLSearchParams(location.search).get("id");
+
+  if (!id || !/^[a-z0-9]{6,16}$/.test(id)) {
+    $("title").textContent = "Paste not found";
+    $("gate").classList.add("hide");
+  } else {
+    fetch("pastes/" + id + ".json?t=" + Date.now())
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (p) {
+        codeText = p.code || "";
+        $("title").textContent = p.title || "Untitled";
+        $("meta").textContent = (p.lang || "text") + " · " + (p.date || "");
+        $("code").textContent = codeText;
+        $("lines").textContent = codeText.split("\n").length + " lines";
+      })
+      .catch(function () {
+        $("title").textContent = "Paste not found (if just published, wait ~1 min)";
+        $("gate").classList.add("hide");
+      });
+  }
+
+  var a, b;
+  $("human").addEventListener("change", function () {
+    if (!this.checked) return;
+    a = 2 + Math.floor(Math.random() * 8);
+    b = 2 + Math.floor(Math.random() * 8);
+    $("q").textContent = a + " + " + b + " = ?";
+    $("step1").classList.add("hide");
+    $("step2").classList.remove("hide");
+    $("ans").focus();
+  });
+
+  function verify() {
+    if (parseInt($("ans").value, 10) === a + b) {
+      $("code").classList.remove("blur");
+      $("gate").classList.add("hide");
+      $("actions").classList.remove("hide");
+    } else {
+      $("err").textContent = "Wrong answer, try again";
+      a = 2 + Math.floor(Math.random() * 8);
+      b = 2 + Math.floor(Math.random() * 8);
+      $("q").textContent = a + " + " + b + " = ?";
+      $("ans").value = "";
+    }
+  }
+  $("verify").addEventListener("click", verify);
+  $("ans").addEventListener("keydown", function (e) { if (e.key === "Enter") verify(); });
+
+  $("copy").addEventListener("click", function () {
+    var btn = this;
+    navigator.clipboard.writeText(codeText).then(function () {
+      btn.textContent = "Copied ✓";
+      setTimeout(function () { btn.textContent = "Copy code"; }, 1800);
+    });
+  });
+
+  // Block manual selecting/copying of the displayed code
+  ["copy", "cut", "dragstart", "selectstart"].forEach(function (ev) {
+    $("code").addEventListener(ev, function (e) { e.preventDefault(); });
+  });
+})();
+</script>
+</body>
+</html>
